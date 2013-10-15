@@ -1,0 +1,143 @@
+PODS:
+  - CocoaAsyncSocket (7.3.2)
+  - CocoaLumberjack (1.6.2)
+  - XMPPFramework (3.6.2):
+    - XMPPFramework/Authentication
+    - XMPPFramework/BandwidthMonitor
+    - XMPPFramework/Categories
+    - XMPPFramework/Core
+    - XMPPFramework/CoreDataStorage
+    - XMPPFramework/GoogleSharedStatus
+    - XMPPFramework/KissXML
+    - XMPPFramework/ProcessOne
+    - XMPPFramework/Reconnect
+    - XMPPFramework/Roster
+    - XMPPFramework/SystemInputActivityMonitor
+    - XMPPFramework/Utilities
+    - XMPPFramework/XEP-0009
+    - XMPPFramework/XEP-0012
+    - XMPPFramework/XEP-0016
+    - XMPPFramework/XEP-0045
+    - XMPPFramework/XEP-0054
+    - XMPPFramework/XEP-0059
+    - XMPPFramework/XEP-0060
+    - XMPPFramework/XEP-0065
+    - XMPPFramework/XEP-0066
+    - XMPPFramework/XEP-0082
+    - XMPPFramework/XEP-0085
+    - XMPPFramework/XEP-0100
+    - XMPPFramework/XEP-0106
+    - XMPPFramework/XEP-0115
+    - XMPPFramework/XEP-0136
+    - XMPPFramework/XEP-0153
+    - XMPPFramework/XEP-0172
+    - XMPPFramework/XEP-0184
+    - XMPPFramework/XEP-0199
+    - XMPPFramework/XEP-0202
+    - XMPPFramework/XEP-0203
+    - XMPPFramework/XEP-0223
+    - XMPPFramework/XEP-0224
+    - XMPPFramework/XEP-0297
+    - XMPPFramework/XEP-0308
+  - XMPPFramework/Authentication (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/BandwidthMonitor (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/Categories (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/Core (3.6.2):
+    - CocoaAsyncSocket (~> 7.3.1)
+    - CocoaLumberjack (~> 1.6.2)
+    - XMPPFramework/Authentication
+    - XMPPFramework/Categories
+    - XMPPFramework/KissXML
+    - XMPPFramework/Utilities
+  - XMPPFramework/CoreDataStorage (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/GoogleSharedStatus (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/KissXML (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/ProcessOne (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/Reconnect (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/Roster (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/CoreDataStorage
+    - XMPPFramework/XEP-0203
+  - XMPPFramework/SystemInputActivityMonitor (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/Utilities (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0009 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0012 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0016 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0045 (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/CoreDataStorage
+    - XMPPFramework/XEP-0203
+  - XMPPFramework/XEP-0054 (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/Roster
+    - XMPPFramework/XEP-0153
+  - XMPPFramework/XEP-0059 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0060 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0065 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0066 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0082 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0085 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0100 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0106 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0115 (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/CoreDataStorage
+  - XMPPFramework/XEP-0136 (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/CoreDataStorage
+    - XMPPFramework/XEP-0085
+    - XMPPFramework/XEP-0203
+  - XMPPFramework/XEP-0153 (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/XEP-0054
+  - XMPPFramework/XEP-0172 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0184 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0199 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0202 (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/XEP-0082
+  - XMPPFramework/XEP-0203 (3.6.2):
+    - XMPPFramework/Core
+    - XMPPFramework/XEP-0082
+  - XMPPFramework/XEP-0223 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0224 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0297 (3.6.2):
+    - XMPPFramework/Core
+  - XMPPFramework/XEP-0308 (3.6.2):
+    - XMPPFramework/Core
+
+DEPENDENCIES:
+  - XMPPFramework (~> 3.6.1)
+
+SPEC CHECKSUMS:
+  CocoaAsyncSocket: 977404129ec8505fee1c3701956b769e3bb10ea7
+  CocoaLumberjack: d73e1e317ced14ab930797dda6c17156ff17aaa1
+  XMPPFramework: 9ed22327308df255e8b36a5a9c12877a54e410df
+
+COCOAPODS: 0.26.2

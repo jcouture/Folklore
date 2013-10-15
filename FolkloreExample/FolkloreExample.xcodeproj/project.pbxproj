@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		096A334D18085DE400EF4D63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A334C18085DE400EF4D63 /* Foundation.framework */; };
+		096A334F18085DE400EF4D63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A334E18085DE400EF4D63 /* CoreGraphics.framework */; };
+		096A335118085DE400EF4D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A335018085DE400EF4D63 /* UIKit.framework */; };
+		096A335718085DE400EF4D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 096A335518085DE400EF4D63 /* InfoPlist.strings */; };
+		096A335918085DE400EF4D63 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 096A335818085DE400EF4D63 /* main.m */; };
+		096A335D18085DE400EF4D63 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 096A335C18085DE400EF4D63 /* AppDelegate.m */; };
+		096A335F18085DE400EF4D63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 096A335E18085DE400EF4D63 /* Images.xcassets */; };
+		096A336618085DE400EF4D63 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A336518085DE400EF4D63 /* XCTest.framework */; };
+		096A336718085DE400EF4D63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A334C18085DE400EF4D63 /* Foundation.framework */; };
+		096A336818085DE400EF4D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A335018085DE400EF4D63 /* UIKit.framework */; };
+		096A337018085DE400EF4D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 096A336E18085DE400EF4D63 /* InfoPlist.strings */; };
+		096A337218085DE400EF4D63 /* FolkloreExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 096A337118085DE400EF4D63 /* FolkloreExampleTests.m */; };
+		0972574D18085E8600124028 /* Folklore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0972574C18085E8600124028 /* Folklore.m */; };
+		097257501808606500124028 /* FolkloreBuddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0972574F1808606500124028 /* FolkloreBuddy.m */; };
+		45020F2EF9EF416CB3A417D7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 929DEC3514B7433FB72F6D4D /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		096A336918085DE400EF4D63 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 096A334118085DE400EF4D63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 096A334818085DE400EF4D63;
+			remoteInfo = FolkloreExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		096A334918085DE400EF4D63 /* FolkloreExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FolkloreExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		096A334C18085DE400EF4D63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		096A334E18085DE400EF4D63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		096A335018085DE400EF4D63 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		096A335418085DE400EF4D63 /* FolkloreExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FolkloreExample-Info.plist"; sourceTree = "<group>"; };
+		096A335618085DE400EF4D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		096A335818085DE400EF4D63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		096A335A18085DE400EF4D63 /* FolkloreExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FolkloreExample-Prefix.pch"; sourceTree = "<group>"; };
+		096A335B18085DE400EF4D63 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		096A335C18085DE400EF4D63 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		096A335E18085DE400EF4D63 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		096A336418085DE400EF4D63 /* FolkloreExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FolkloreExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		096A336518085DE400EF4D63 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		096A336D18085DE400EF4D63 /* FolkloreExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FolkloreExampleTests-Info.plist"; sourceTree = "<group>"; };
+		096A336F18085DE400EF4D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		096A337118085DE400EF4D63 /* FolkloreExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FolkloreExampleTests.m; sourceTree = "<group>"; };
+		0972574B18085E8600124028 /* Folklore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folklore.h; sourceTree = "<group>"; };
+		0972574C18085E8600124028 /* Folklore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folklore.m; sourceTree = "<group>"; };
+		0972574E1808606500124028 /* FolkloreBuddy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolkloreBuddy.h; sourceTree = "<group>"; };
+		0972574F1808606500124028 /* FolkloreBuddy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolkloreBuddy.m; sourceTree = "<group>"; };
+		929DEC3514B7433FB72F6D4D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAA3612D4EC940858C30E8C9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		096A334618085DE400EF4D63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				096A334F18085DE400EF4D63 /* CoreGraphics.framework in Frameworks */,
+				096A335118085DE400EF4D63 /* UIKit.framework in Frameworks */,
+				096A334D18085DE400EF4D63 /* Foundation.framework in Frameworks */,
+				45020F2EF9EF416CB3A417D7 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		096A336118085DE400EF4D63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				096A336618085DE400EF4D63 /* XCTest.framework in Frameworks */,
+				096A336818085DE400EF4D63 /* UIKit.framework in Frameworks */,
+				096A336718085DE400EF4D63 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		096A334018085DE400EF4D63 = {
+			isa = PBXGroup;
+			children = (
+				0972574A18085E7B00124028 /* Folklore */,
+				096A335218085DE400EF4D63 /* FolkloreExample */,
+				096A336B18085DE400EF4D63 /* FolkloreExampleTests */,
+				096A334B18085DE400EF4D63 /* Frameworks */,
+				096A334A18085DE400EF4D63 /* Products */,
+				FAA3612D4EC940858C30E8C9 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		096A334A18085DE400EF4D63 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				096A334918085DE400EF4D63 /* FolkloreExample.app */,
+				096A336418085DE400EF4D63 /* FolkloreExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		096A334B18085DE400EF4D63 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				096A334C18085DE400EF4D63 /* Foundation.framework */,
+				096A334E18085DE400EF4D63 /* CoreGraphics.framework */,
+				096A335018085DE400EF4D63 /* UIKit.framework */,
+				096A336518085DE400EF4D63 /* XCTest.framework */,
+				929DEC3514B7433FB72F6D4D /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		096A335218085DE400EF4D63 /* FolkloreExample */ = {
+			isa = PBXGroup;
+			children = (
+				096A335B18085DE400EF4D63 /* AppDelegate.h */,
+				096A335C18085DE400EF4D63 /* AppDelegate.m */,
+				096A335E18085DE400EF4D63 /* Images.xcassets */,
+				096A335318085DE400EF4D63 /* Supporting Files */,
+			);
+			path = FolkloreExample;
+			sourceTree = "<group>";
+		};
+		096A335318085DE400EF4D63 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				096A335418085DE400EF4D63 /* FolkloreExample-Info.plist */,
+				096A335518085DE400EF4D63 /* InfoPlist.strings */,
+				096A335818085DE400EF4D63 /* main.m */,
+				096A335A18085DE400EF4D63 /* FolkloreExample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		096A336B18085DE400EF4D63 /* FolkloreExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				096A337118085DE400EF4D63 /* FolkloreExampleTests.m */,
+				096A336C18085DE400EF4D63 /* Supporting Files */,
+			);
+			path = FolkloreExampleTests;
+			sourceTree = "<group>";
+		};
+		096A336C18085DE400EF4D63 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				096A336D18085DE400EF4D63 /* FolkloreExampleTests-Info.plist */,
+				096A336E18085DE400EF4D63 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0972574A18085E7B00124028 /* Folklore */ = {
+			isa = PBXGroup;
+			children = (
+				0972574B18085E8600124028 /* Folklore.h */,
+				0972574C18085E8600124028 /* Folklore.m */,
+				0972574E1808606500124028 /* FolkloreBuddy.h */,
+				0972574F1808606500124028 /* FolkloreBuddy.m */,
+			);
+			name = Folklore;
+			path = ../Folklore;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		096A334818085DE400EF4D63 /* FolkloreExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 096A337518085DE400EF4D63 /* Build configuration list for PBXNativeTarget "FolkloreExample" */;
+			buildPhases = (
+				6862FC13265547CF902CFFAD /* Check Pods Manifest.lock */,
+				096A334518085DE400EF4D63 /* Sources */,
+				096A334618085DE400EF4D63 /* Frameworks */,
+				096A334718085DE400EF4D63 /* Resources */,
+				0F8B061EE21F4EBFBB0B7B13 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FolkloreExample;
+			productName = FolkloreExample;
+			productReference = 096A334918085DE400EF4D63 /* FolkloreExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		096A336318085DE400EF4D63 /* FolkloreExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 096A337818085DE400EF4D63 /* Build configuration list for PBXNativeTarget "FolkloreExampleTests" */;
+			buildPhases = (
+				096A336018085DE400EF4D63 /* Sources */,
+				096A336118085DE400EF4D63 /* Frameworks */,
+				096A336218085DE400EF4D63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				096A336A18085DE400EF4D63 /* PBXTargetDependency */,
+			);
+			name = FolkloreExampleTests;
+			productName = FolkloreExampleTests;
+			productReference = 096A336418085DE400EF4D63 /* FolkloreExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		096A334118085DE400EF4D63 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Jean-Philippe Couture";
+				TargetAttributes = {
+					096A336318085DE400EF4D63 = {
+						TestTargetID = 096A334818085DE400EF4D63;
+					};
+				};
+			};
+			buildConfigurationList = 096A334418085DE400EF4D63 /* Build configuration list for PBXProject "FolkloreExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 096A334018085DE400EF4D63;
+			productRefGroup = 096A334A18085DE400EF4D63 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				096A334818085DE400EF4D63 /* FolkloreExample */,
+				096A336318085DE400EF4D63 /* FolkloreExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		096A334718085DE400EF4D63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				096A335718085DE400EF4D63 /* InfoPlist.strings in Resources */,
+				096A335F18085DE400EF4D63 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		096A336218085DE400EF4D63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				096A337018085DE400EF4D63 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F8B061EE21F4EBFBB0B7B13 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6862FC13265547CF902CFFAD /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		096A334518085DE400EF4D63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				097257501808606500124028 /* FolkloreBuddy.m in Sources */,
+				0972574D18085E8600124028 /* Folklore.m in Sources */,
+				096A335D18085DE400EF4D63 /* AppDelegate.m in Sources */,
+				096A335918085DE400EF4D63 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		096A336018085DE400EF4D63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				096A337218085DE400EF4D63 /* FolkloreExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		096A336A18085DE400EF4D63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 096A334818085DE400EF4D63 /* FolkloreExample */;
+			targetProxy = 096A336918085DE400EF4D63 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		096A335518085DE400EF4D63 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				096A335618085DE400EF4D63 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		096A336E18085DE400EF4D63 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				096A336F18085DE400EF4D63 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		096A337318085DE400EF4D63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		096A337418085DE400EF4D63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		096A337618085DE400EF4D63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAA3612D4EC940858C30E8C9 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FolkloreExample/FolkloreExample-Prefix.pch";
+				INFOPLIST_FILE = "FolkloreExample/FolkloreExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		096A337718085DE400EF4D63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FAA3612D4EC940858C30E8C9 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FolkloreExample/FolkloreExample-Prefix.pch";
+				INFOPLIST_FILE = "FolkloreExample/FolkloreExample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		096A337918085DE400EF4D63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FolkloreExample.app/FolkloreExample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FolkloreExample/FolkloreExample-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FolkloreExampleTests/FolkloreExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		096A337A18085DE400EF4D63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FolkloreExample.app/FolkloreExample";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FolkloreExample/FolkloreExample-Prefix.pch";
+				INFOPLIST_FILE = "FolkloreExampleTests/FolkloreExampleTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		096A334418085DE400EF4D63 /* Build configuration list for PBXProject "FolkloreExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				096A337318085DE400EF4D63 /* Debug */,
+				096A337418085DE400EF4D63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		096A337518085DE400EF4D63 /* Build configuration list for PBXNativeTarget "FolkloreExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				096A337618085DE400EF4D63 /* Debug */,
+				096A337718085DE400EF4D63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		096A337818085DE400EF4D63 /* Build configuration list for PBXNativeTarget "FolkloreExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				096A337918085DE400EF4D63 /* Debug */,
+				096A337A18085DE400EF4D63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 096A334118085DE400EF4D63 /* Project object */;
+}
