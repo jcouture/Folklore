@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090800AE1811BC1400F468B8 /* FolkloreBuddyInformations.m in Sources */ = {isa = PBXBuildFile; fileRef = 090800AD1811BC1400F468B8 /* FolkloreBuddyInformations.m */; };
 		096A334D18085DE400EF4D63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A334C18085DE400EF4D63 /* Foundation.framework */; };
 		096A334F18085DE400EF4D63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A334E18085DE400EF4D63 /* CoreGraphics.framework */; };
 		096A335118085DE400EF4D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A335018085DE400EF4D63 /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		090800AC1811BC1400F468B8 /* FolkloreBuddyInformations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolkloreBuddyInformations.h; sourceTree = "<group>"; };
+		090800AD1811BC1400F468B8 /* FolkloreBuddyInformations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolkloreBuddyInformations.m; sourceTree = "<group>"; };
 		096A334918085DE400EF4D63 /* FolkloreExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FolkloreExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		096A334C18085DE400EF4D63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		096A334E18085DE400EF4D63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -164,6 +167,8 @@
 				0972574C18085E8600124028 /* Folklore.m */,
 				0972574E1808606500124028 /* FolkloreBuddy.h */,
 				0972574F1808606500124028 /* FolkloreBuddy.m */,
+				090800AC1811BC1400F468B8 /* FolkloreBuddyInformations.h */,
+				090800AD1811BC1400F468B8 /* FolkloreBuddyInformations.m */,
 			);
 			name = Folklore;
 			path = ../Folklore;
@@ -301,6 +306,7 @@
 			files = (
 				097257501808606500124028 /* FolkloreBuddy.m in Sources */,
 				0972574D18085E8600124028 /* Folklore.m in Sources */,
+				090800AE1811BC1400F468B8 /* FolkloreBuddyInformations.m in Sources */,
 				096A335D18085DE400EF4D63 /* AppDelegate.m in Sources */,
 				096A335918085DE400EF4D63 /* main.m in Sources */,
 			);

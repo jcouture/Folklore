@@ -23,6 +23,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FolkloreBuddy.h"
+#import "FolkloreBuddyInformations.h"
 
 typedef NS_ENUM(NSInteger, LoLServerRegion) {
     LoLServerRegionNorthAmerica,
@@ -40,15 +41,15 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
     FolkloreNotAuthorized
 };
 
+@class FolkloreBuddyInformations;
 @protocol FolkloreDelegate;
 
-
 @interface Folklore : NSObject
+@property (nonatomic, weak) id <FolkloreDelegate> delegate;
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion;
 - (void)connectWithUsername:(NSString *)username password:(NSString *)password;
 - (void)disconnect;
 - (void)sendMessage:(NSString *)message toBuddy:(FolkloreBuddy *)buddy;
-@property (nonatomic, weak) id <FolkloreDelegate> delegate;
 @end
 
 
@@ -58,4 +59,6 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
 - (void)folkloreConnection:(Folklore *)folklore failedWithError:(NSError *)error;
 - (void)folklore:(Folklore *)folklore receivedMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy;
 - (void)folklore:(Folklore *)folklore updatedBuddyList:(NSArray *)buddyList;
+- (void)folklore:(Folklore *)folklore receivedBuddyInformations:(FolkloreBuddyInformations *)buddyInformations;
+
 @end

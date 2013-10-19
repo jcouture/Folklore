@@ -95,4 +95,8 @@
     }
 }
 
+- (void)folklore:(Folklore *)folklore receivedBuddyInformations:(FolkloreBuddyInformations *)buddyInformations {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 @end

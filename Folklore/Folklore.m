@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "Folklore.h"
+#import "FolkloreBuddyInformations.h"
 #import <XMPPFramework/XMPPFramework.h>
 #import <XMPPFramework/XMPPReconnect.h>
 #import <XMPPFramework/XMPPRoster.h>
@@ -32,6 +33,7 @@
 @property (nonatomic) XMPPStream *stream;
 @property (nonatomic) NSString *password;
 @property (nonatomic) NSArray *rosterUsers;
+@property (nonatomic, assign) BOOL canSendPresence;
 @end
 
 @implementation Folklore
@@ -162,9 +164,6 @@
     if ([_delegate respondsToSelector:@selector(folkloreDidConnect:)]) {
         [_delegate folkloreDidConnect:self];
     }
-    
-    XMPPPresence *presence = [XMPPPresence presence];
-    [sender sendElement:presence];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
@@ -189,10 +188,47 @@
     }
 }
 
+- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
+    for (id <XMPPUser> user in _rosterUsers) {
+        if ([[user jid] isEqualToJID:[presence from] options:XMPPJIDCompareUser]) {
+            FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
+            FolkloreBuddyInformations *buddyInformations = [[FolkloreBuddyInformations alloc] initWithBuddy:buddy];
+
+            NSString *sanitizedStatus = [[presence status] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSXMLElement *statusElement = [[NSXMLElement alloc] initWithXMLString:sanitizedStatus error:nil];
+            [buddyInformations setProfileIcon:[[statusElement elementForName:@"profileIcon"] stringValueAsNSInteger]];
+            [buddyInformations setLevel:[[statusElement elementForName:@"level"] stringValueAsNSInteger]];
+            [buddyInformations setWins:[[statusElement elementForName:@"wins"] stringValueAsNSInteger]];
+            [buddyInformations setLeaves:[[statusElement elementForName:@"leaves"] stringValueAsNSInteger]];
+            [buddyInformations setOdinWins:[[statusElement elementForName:@"odinWins"] stringValueAsNSInteger]];
+            [buddyInformations setOdinLeaves:[[statusElement elementForName:@"odinLeaves"] stringValueAsNSInteger]];
+            [buddyInformations setRankedLosses:[[statusElement elementForName:@"rankedLosses"] stringValueAsNSInteger]];
+            [buddyInformations setRankedRating:[[statusElement elementForName:@"rankedRating"] stringValueAsNSInteger]];
+            [buddyInformations setTier:[[statusElement elementForName:@"tier"] stringValue]];
+            [buddyInformations setSkinname:[[statusElement elementForName:@"skinname"] stringValue]];
+            [buddyInformations setGameQueueType:[[statusElement elementForName:@"gameQueueType"] stringValue]];
+            [buddyInformations setStatusMessage:[[statusElement elementForName:@"statusMsg"] stringValue]];
+            [buddyInformations setGameStatus:[[statusElement elementForName:@"gameStatus"] stringValue]];
+            [buddyInformations setTimeStamp:[[statusElement elementForName:@"timestamp"] stringValueAsDouble]];
+            
+            if ([_delegate respondsToSelector:@selector(folklore:receivedBuddyInformations:)]) {
+                [_delegate folklore:self receivedBuddyInformations:buddyInformations];
+            }
+        }
+    }
+}
+
 
 #pragma mark - XMPPRosterMemoryStorageDelegate Protocol
 
 - (void)xmppRosterDidChange:(XMPPRosterMemoryStorage *)sender {
+    if (!_canSendPresence) {
+        _canSendPresence = YES;
+        
+        XMPPPresence *presence = [XMPPPresence presence];
+        [_stream sendElement:presence];
+    }
+    
     _rosterUsers = [sender sortedUsersByAvailabilityName];
     NSMutableArray *buddyList = [[NSMutableArray alloc] init];
     
