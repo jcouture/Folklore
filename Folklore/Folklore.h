@@ -32,7 +32,15 @@ typedef NS_ENUM(NSInteger, LoLServerRegion) {
     LoLServerRegionTaiwan,
     LoLServerRegionThailand,
     LoLServerRegionPhilippines,
-    LoLServerRegionVietnam
+    LoLServerRegionVietnam,
+    LoLServerRegionKorean,
+    LoLServerRegionBrazil,
+    LoLServerRegionTurkey,
+    LoLServerRegionRussia,
+    LoLServerRegionLatinNorth,
+    LoLServerRegionLatinSouth,
+    LoLServerRegionOceanic,
+    LoLServerRegionPublicBeta
 };
 
 static NSString *const FolkloreErrorDomain = @"FolkloreErrorDomain";
