@@ -126,6 +126,30 @@
         case LoLServerRegionNordicEast:
             hostname = @"chat.eun1.lol.riotgames.com";
             break;
+        case LoLServerRegionKorean:
+            hostname = @"chat.kr.lol.riotgames.com";
+            break;            
+        case LoLServerRegionBrazil:
+            hostname = @"chat.br.lol.riotgames.com";
+            break;            
+        case LoLServerRegionTurkey:
+            hostname = @"chat.tr.lol.riotgames.com";
+            break;             
+	case LoLServerRegionRussia:
+            hostname = @"chat.ru.lol.riotgames.com";
+            break;                  
+        case LoLServerRegionLatinNorth:
+            hostname = @"chat.la1.lol.riotgames.com";
+            break;               
+        case LoLServerRegionLatinSouth:
+            hostname = @"chat.la2.lol.riotgames.com";
+            break;       
+	case LoLServerRegionOceanic:
+            hostname = @"chat.oc1.lol.riotgames.com";
+            break;                 
+	case LoLServerRegionPublicBeta:
+            hostname = @"chat.pbe1.lol.riotgames.com";
+            break;                             
         case LoLServerRegionTaiwan:
             hostname = @"chattw.lol.garenanow.com";
             break;
