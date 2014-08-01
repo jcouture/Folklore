@@ -28,6 +28,9 @@
 #import <XMPPFramework/XMPPRoster.h>
 #import <XMPPFramework/XMPPRosterMemoryStorage.h>
 #import <XMPPFramework/XMPPUser.h>
+#import <XMPPFramework/XMPPLogging.h>
+#import <CocoaLumberjack/DDLog.h>
+#import <CocoaLumberjack/DDTTYLogger.h>
 
 @interface Folklore ()
 @property (nonatomic) XMPPStream *stream;
@@ -39,8 +42,16 @@
 @implementation Folklore
 
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion {
+    return [self initWithServerRegion:serverRegion withConsoleDebugOutput:NO];
+}
+
+- (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConsoleDebugOutput:(BOOL)consoleDebugOutput {
     if (self = [super init]) {
         NSString *hostname = [self hostnameForServerRegion:serverRegion];
+        
+        if (consoleDebugOutput) {
+            [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
+        }
         
         //* Setup the XMPPStream
         _stream = [[XMPPStream alloc] init];

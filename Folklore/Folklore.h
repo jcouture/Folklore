@@ -54,7 +54,9 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
 
 @interface Folklore : NSObject
 @property (nonatomic, weak) id <FolkloreDelegate> delegate;
+- (id)init __attribute__((unavailable));
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion;
+- (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConsoleDebugOutput:(BOOL)consoleDebugOutput;
 - (void)connectWithUsername:(NSString *)username password:(NSString *)password;
 - (void)disconnect;
 - (void)sendMessage:(NSString *)message toBuddy:(FolkloreBuddy *)buddy;
