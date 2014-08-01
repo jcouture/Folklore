@@ -14,5 +14,5 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.7'
   s.ios.deployment_target = '6.0'
 
-  s.dependency 'XMPPFramework', '~> 3.6.2'
+  s.dependency 'XMPPFramework', '~> 3.6.4'
 end
