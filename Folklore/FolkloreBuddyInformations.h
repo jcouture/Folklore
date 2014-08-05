@@ -23,27 +23,27 @@
 
 #import <Foundation/Foundation.h>
 
-@class FolkloreBuddy;
+@class XMPPPresence;
 
 @interface FolkloreBuddyInformations : NSObject
 
-- (instancetype)initWithBuddy:(FolkloreBuddy *)buddy;
++ (FolkloreBuddyInformations *)buddyInformationsWithPresence:(XMPPPresence *)presence;
 
-@property (nonatomic, readonly) FolkloreBuddy *buddy;
-
-@property (nonatomic, assign) NSInteger profileIcon;
-@property (nonatomic, assign) NSInteger level;
-@property (nonatomic, assign) NSInteger wins;
-@property (nonatomic, assign) NSInteger leaves;
-@property (nonatomic, assign) NSInteger odinWins;
-@property (nonatomic, assign) NSInteger odinLeaves;
-@property (nonatomic, assign) NSInteger rankedLosses;
-@property (nonatomic, assign) NSInteger rankedRating;
+@property (nonatomic) NSInteger profileIcon;
+@property (nonatomic) NSInteger level;
+@property (nonatomic) NSInteger wins;
+@property (nonatomic) NSInteger leaves;
+@property (nonatomic) NSInteger odinWins;
+@property (nonatomic) NSInteger odinLeaves;
 @property (nonatomic) NSString *tier;
-@property (nonatomic) NSString *skinname;
-@property (nonatomic) NSString *gameQueueType;
 @property (nonatomic) NSString *statusMessage;
 @property (nonatomic) NSString *gameStatus;
-@property (nonatomic) NSTimeInterval timeStamp;
+@property (nonatomic) NSString *rankedLeagueName;
+@property (nonatomic) NSString *rankedLeagueDivision;
+@property (nonatomic) NSString *rankedLeagueTier;
+@property (nonatomic) NSString *rankedLeagueQueue;
+@property (nonatomic) NSInteger rankedWins;
+@property (nonatomic) NSInteger rankedLosses;
+@property (nonatomic) NSInteger rankedRating;
 
 @end

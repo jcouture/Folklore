@@ -22,18 +22,56 @@
 // THE SOFTWARE.
 
 #import "FolkloreBuddyInformations.h"
+#import <XMPPFramework/XMPPUser.h>
 
 @implementation FolkloreBuddyInformations
 
-- (instancetype)initWithBuddy:(FolkloreBuddy *)buddy
-{
-    if (self = [super init]) {
-        NSParameterAssert(buddy);
-        
-        _buddy = buddy;
++ (FolkloreBuddyInformations *)buddyInformationsWithPresence:(XMPPPresence *)presence {
+    FolkloreBuddyInformations *buddyInformations = nil;
+    NSString *status = [presence status];
+    if ([status length] > 0) {
+        NSString *sanitizedStatus = [status stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSXMLElement *statusElement = [[NSXMLElement alloc] initWithXMLString:sanitizedStatus error:nil];
+        buddyInformations = [FolkloreBuddyInformations new];
+        [buddyInformations setProfileIcon:[[statusElement elementForName:@"profileIcon"] stringValueAsNSInteger]];
+        [buddyInformations setLevel:[[statusElement elementForName:@"level"] stringValueAsNSInteger]];
+        [buddyInformations setWins:[[statusElement elementForName:@"wins"] stringValueAsNSInteger]];
+        [buddyInformations setLeaves:[[statusElement elementForName:@"leaves"] stringValueAsNSInteger]];
+        [buddyInformations setOdinWins:[[statusElement elementForName:@"odinWins"] stringValueAsNSInteger]];
+        [buddyInformations setOdinLeaves:[[statusElement elementForName:@"odinLeaves"] stringValueAsNSInteger]];
+        [buddyInformations setTier:[[statusElement elementForName:@"tier"] stringValue]];
+        [buddyInformations setStatusMessage:[[statusElement elementForName:@"statusMsg"] stringValue]];
+        [buddyInformations setGameStatus:[[statusElement elementForName:@"gameStatus"] stringValue]];
+        [buddyInformations setRankedWins:[[statusElement elementForName:@"rankedWins"] stringValueAsNSInteger]];
+        [buddyInformations setRankedLosses:[[statusElement elementForName:@"rankedLosses"] stringValueAsNSInteger]];
+        [buddyInformations setRankedRating:[[statusElement elementForName:@"rankedRating"] stringValueAsNSInteger]];
+        [buddyInformations setRankedLeagueName:[[statusElement elementForName:@"rankedLeagueName"] stringValue]];
+        [buddyInformations setRankedLeagueDivision:[[statusElement elementForName:@"rankedLeagueDivision"] stringValue]];
+        [buddyInformations setRankedLeagueTier:[[statusElement elementForName:@"rankedLeagueTier"] stringValue]];
+        [buddyInformations setRankedLeagueQueue:[[statusElement elementForName:@"rankedLeagueQueue"] stringValue]];
     }
-    
-    return self;
+    return buddyInformations;
+}
+
+- (NSString *)description {
+    NSMutableString *d = [[NSMutableString alloc] initWithString:@"\n-----\nBUDDY INFORMATIONS\n"];
+    [d appendFormat:@"profileIcon: %i\n", self.profileIcon];
+    [d appendFormat:@"level: %i\n", self.level];
+    [d appendFormat:@"wins: %i\n", self.wins];
+    [d appendFormat:@"leaves: %i\n", self.leaves];
+    [d appendFormat:@"odinWins: %i\n", self.odinWins];
+    [d appendFormat:@"odinLeaves: %i\n", self.odinLeaves];
+    [d appendFormat:@"tier: %@\n", self.tier];
+    [d appendFormat:@"statusMessage: %@\n", self.statusMessage];
+    [d appendFormat:@"gameStatus: %@\n", self.gameStatus];
+    [d appendFormat:@"rankedLeagueName: %@\n", self.rankedLeagueName];
+    [d appendFormat:@"rankedLeagueDivision: %@\n", self.rankedLeagueDivision];
+    [d appendFormat:@"rankedLeagueTier: %@\n", self.rankedLeagueTier];
+    [d appendFormat:@"rankedLeagueQueue: %@\n", self.rankedLeagueQueue];
+    [d appendFormat:@"rankedWins: %i\n", self.rankedWins];
+    [d appendFormat:@"rankedLosses: %i\n", self.rankedLosses];
+    [d appendFormat:@"rankedRating: %i\n", self.rankedRating];
+    return d;
 }
 
 @end

@@ -24,11 +24,14 @@
 #import <Foundation/Foundation.h>
 #import <XMPPFramework/XMPPJID.h>
 
+@class FolkloreBuddyInformations;
+
 @interface FolkloreBuddy : NSObject
 
 @property (nonatomic, readonly) XMPPJID *JID;
 @property (nonatomic) NSString *name;
 @property (nonatomic, getter = isOnline) BOOL online;
+@property (nonatomic) FolkloreBuddyInformations *buddyInformations;
 
 - (instancetype)initWithJID:(XMPPJID *)JID;
 
