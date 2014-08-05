@@ -31,12 +31,12 @@
 #import <XMPPFramework/XMPPLogging.h>
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
+#import <XMPPFramework/XMPPJID.h>
 
 @interface Folklore ()
 @property (nonatomic) XMPPStream *stream;
 @property (nonatomic) NSString *password;
 @property (nonatomic) NSArray *rosterUsers;
-@property (nonatomic, assign) BOOL canSendPresence;
 @end
 
 @implementation Folklore
@@ -84,8 +84,8 @@
     NSError *error = nil;
     
     if (![_stream oldSchoolSecureConnectWithTimeout:5 error:&error]) {
-        if ([_delegate respondsToSelector:@selector(folkloreConnection:failedWithError:)]) {
-            [_delegate folkloreConnection:self failedWithError:error];
+        if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailedWithError:)]) {
+            [_delegate folkloreConnection:self didFailedWithError:error];
         }
     }
 }
@@ -93,7 +93,6 @@
 - (void)disconnect {
     XMPPPresence *presence = [XMPPPresence presenceWithType:@"unavailable"];
     [_stream sendElement:presence];
-    
     [_stream disconnectAfterSending];
 }
 
@@ -146,7 +145,7 @@
         case LoLServerRegionTurkey:
             hostname = @"chat.tr.lol.riotgames.com";
             break;             
-	case LoLServerRegionRussia:
+        case LoLServerRegionRussia:
             hostname = @"chat.ru.lol.riotgames.com";
             break;                  
         case LoLServerRegionLatinNorth:
@@ -155,10 +154,10 @@
         case LoLServerRegionLatinSouth:
             hostname = @"chat.la2.lol.riotgames.com";
             break;       
-	case LoLServerRegionOceanic:
+        case LoLServerRegionOceanic:
             hostname = @"chat.oc1.lol.riotgames.com";
             break;                 
-	case LoLServerRegionPublicBeta:
+        case LoLServerRegionPublicBeta:
             hostname = @"chat.pbe1.lol.riotgames.com";
             break;                             
         case LoLServerRegionTaiwan:
@@ -186,8 +185,8 @@
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
     NSError *error = nil;
     if (![_stream authenticateWithPassword:[NSString stringWithFormat:@"AIR_%@", _password] error:&error]) {
-        if ([_delegate respondsToSelector:@selector(folkloreConnection:failedWithError:)]) {
-            [_delegate folkloreConnection:self failedWithError:error];
+        if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailedWithError:)]) {
+            [_delegate folkloreConnection:self didFailedWithError:error];
         }
     }
 }
@@ -199,78 +198,73 @@
     if ([_delegate respondsToSelector:@selector(folkloreDidConnect:)]) {
         [_delegate folkloreDidConnect:self];
     }
+    
+    [_stream sendElement:[XMPPPresence presence]];
 }
 
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
     NSString *message = @"Connection not authorized.";
     NSError *err = [NSError errorWithDomain:FolkloreErrorDomain code:FolkloreNotAuthorized userInfo:@{NSLocalizedDescriptionKey: message}];
-    if ([_delegate respondsToSelector:@selector(folkloreConnection:failedWithError:)]) {
-        [_delegate folkloreConnection:self failedWithError:err];
+    if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailedWithError:)]) {
+        [_delegate folkloreConnection:self didFailedWithError:err];
     }
 }
 
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message {
-    if([message isChatMessageWithBody]) {
+    if ([message isChatMessageWithBody]) {
 		NSString *body = [[message elementForName:@"body"] stringValue];
         for (id <XMPPUser> user in _rosterUsers) {
             if ([[user jid] isEqualToJID:[message from] options:XMPPJIDCompareUser]) {
-                if ([_delegate respondsToSelector:@selector(folklore:receivedMessage:fromBuddy:)]) {
+                if ([_delegate respondsToSelector:@selector(folklore:didReceivedMessage:fromBuddy:)]) {
                     FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
-                    [_delegate folklore:self receivedMessage:body fromBuddy:buddy];
+                    [_delegate folklore:self didReceivedMessage:body fromBuddy:buddy];
                 }
             }
         }
     }
 }
 
-- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence {
-    for (id <XMPPUser> user in _rosterUsers) {
-        FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
-        FolkloreBuddyInformations *buddyInformations = [[FolkloreBuddyInformations alloc] initWithBuddy:buddy];
-
-        NSString *sanitizedStatus = [[presence status] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSXMLElement *statusElement = [[NSXMLElement alloc] initWithXMLString:sanitizedStatus error:nil];
-        [buddyInformations setProfileIcon:[[statusElement elementForName:@"profileIcon"] stringValueAsNSInteger]];
-        [buddyInformations setLevel:[[statusElement elementForName:@"level"] stringValueAsNSInteger]];
-        [buddyInformations setWins:[[statusElement elementForName:@"wins"] stringValueAsNSInteger]];
-        [buddyInformations setLeaves:[[statusElement elementForName:@"leaves"] stringValueAsNSInteger]];
-        [buddyInformations setOdinWins:[[statusElement elementForName:@"odinWins"] stringValueAsNSInteger]];
-        [buddyInformations setOdinLeaves:[[statusElement elementForName:@"odinLeaves"] stringValueAsNSInteger]];
-        [buddyInformations setRankedLosses:[[statusElement elementForName:@"rankedLosses"] stringValueAsNSInteger]];
-        [buddyInformations setRankedRating:[[statusElement elementForName:@"rankedRating"] stringValueAsNSInteger]];
-        [buddyInformations setTier:[[statusElement elementForName:@"tier"] stringValue]];
-        [buddyInformations setSkinname:[[statusElement elementForName:@"skinname"] stringValue]];
-        [buddyInformations setGameQueueType:[[statusElement elementForName:@"gameQueueType"] stringValue]];
-        [buddyInformations setStatusMessage:[[statusElement elementForName:@"statusMsg"] stringValue]];
-        [buddyInformations setGameStatus:[[statusElement elementForName:@"gameStatus"] stringValue]];
-        [buddyInformations setTimeStamp:[[statusElement elementForName:@"timestamp"] stringValueAsDouble]];
-        
-        if ([_delegate respondsToSelector:@selector(folklore:receivedBuddyInformations:)]) {
-            [_delegate folklore:self receivedBuddyInformations:buddyInformations];
-        }
-    }
-}
-
-
 #pragma mark - XMPPRosterMemoryStorageDelegate Protocol
 
-- (void)xmppRosterDidChange:(XMPPRosterMemoryStorage *)sender {
-    if (!_canSendPresence) {
-        _canSendPresence = YES;
-        
-        XMPPPresence *presence = [XMPPPresence presence];
-        [_stream sendElement:presence];
-    }
-    
+- (void)xmppRosterDidPopulate:(XMPPRosterMemoryStorage *)sender {
     _rosterUsers = [sender sortedUsersByAvailabilityName];
-    NSMutableArray *buddyList = [[NSMutableArray alloc] init];
+    NSMutableArray *buddyList = [[NSMutableArray alloc] initWithCapacity:[_rosterUsers count]];
     
     for (id <XMPPUser> user in _rosterUsers) {
         [buddyList addObject:[self buddyWithXMPPUser:user]];
     }
     
-    if ([_delegate respondsToSelector:@selector(folklore:updatedBuddyList:)]) {
-        [_delegate folklore:self updatedBuddyList:buddyList];
+    if ([_delegate respondsToSelector:@selector(folklore:didPopulateBuddyList:)]) {
+        [_delegate folklore:self didPopulateBuddyList:buddyList];
+    }
+}
+
+- (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didAddResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
+    XMPPJID *myJID = [_stream myJID];
+    XMPPJID *userJID = user.jid;
+    if ([[user jid] isEqualToJID:myJID options:XMPPJIDCompareUser]) {
+        if ([_delegate respondsToSelector:@selector(folklore:didUpdateCurrentBuddyStatus:)]) {
+            [_delegate folklore:self didUpdateCurrentBuddyStatus:[self buddyWithXMPPUser:user]];
+        }
+    } else {
+        [self notifyBuddyUpdateStatusWithUser:user resource:resource];
+    }
+}
+
+- (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didUpdateResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
+    [self notifyBuddyUpdateStatusWithUser:user resource:resource];
+}
+
+- (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didRemoveResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
+    [self notifyBuddyUpdateStatusWithUser:user resource:resource];
+}
+
+- (void)notifyBuddyUpdateStatusWithUser:(XMPPUserMemoryStorageObject *)user resource:(XMPPResourceMemoryStorageObject *)resource {
+    FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
+    buddy.buddyInformations = [FolkloreBuddyInformations buddyInformationsWithPresence:resource.presence];
+
+    if ([_delegate respondsToSelector:@selector(folklore:didUpdateBuddyStatus:)]) {
+        [_delegate folklore:self didUpdateBuddyStatus:[self buddyWithXMPPUser:user]];
     }
 }
 

@@ -31,7 +31,7 @@ Don't forget to `#import <Folklore/Folklore.h>`.
     NSLog(@"Connection successful");
 }
 
-- (void)folkloreConnection:(Folklore *)folklore failedWithError:(NSError *)error {
+- (void)folkloreConnection:(Folklore *)folklore didFailedWithError:(NSError *)error {
     NSLog(@"Connection failed with error: %@", error);
 }
 ```
@@ -41,7 +41,7 @@ Don't forget to `#import <Folklore/Folklore.h>`.
 ```objc
 #pragma mark - FolkloreDelegate Protocol
 
-- (void)folklore:(Folklore *)folklore updatedBuddyList:(NSArray *)buddies {
+- (void)folklore:(Folklore *)folklore didUpdatedBuddyList:(NSArray *)buddies {
     for (FolkloreBuddy *buddy in buddies) {
         NSLog(@"%@ is %@", buddy.name, (buddy.isOnline ? @"online" : @"offline"));
     }
@@ -56,25 +56,8 @@ Don't forget to `#import <Folklore/Folklore.h>`.
 
 #pragma mark - FolkloreDelegate Protocol
 
-- (void)folklore:(Folklore *)folklore receivedMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didReceivedMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
     NSLog(@"[%@] %@", buddy.name, message);
-}
-```
-
-### Buddy Informations
-
-```objc
-#pragma mark - FolkloreDelegate Protocol
-
-- (void)folklore:(Folklore *)folklore receivedBuddyInformations:(FolkloreBuddyInformations *)buddyInformations {
-    NSMutableString *informations = [NSMutableString new];
-    [informations appendFormat:@"Received informations from buddy: %@\n", buddyInformations.buddy.name];
-    [informations appendFormat:@"\tStatus Message: %@\n", buddyInformations.statusMessage];
-    [informations appendFormat:@"\tLevel: %ld\n", (long)buddyInformations.level];
-    [informations appendFormat:@"\tGame Status: %@\n", buddyInformations.gameStatus];
-    [informations appendFormat:@"\tWins: %ld\n", (long)buddyInformations.wins];
-    [informations appendFormat:@"\tLeaves: %ld\n", (long)buddyInformations.leaves];
-    NSLog(@"%@", informations);
 }
 ```
 

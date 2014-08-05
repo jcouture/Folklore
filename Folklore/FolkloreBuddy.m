@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "FolkloreBuddy.h"
+#import "FolkloreBuddyInformations.h"
 
 @implementation FolkloreBuddy
 
@@ -31,6 +32,15 @@
         _JID = JID;
     }
     return self;
+}
+
+- (NSString *)description {
+    NSMutableString *d = [[NSMutableString alloc] initWithString:@"\n-----\nBUDDY\n"];
+    [d appendFormat:@"id: %@\n", [self.JID description]];
+    [d appendFormat:@"name: %@\n", self.name];
+    [d appendFormat:@"isOnline: %@\n", self.isOnline ? @"true" : @"false"];
+    [d appendFormat:@"%@\n", [self.buddyInformations description]];
+    return d;
 }
 
 @end
