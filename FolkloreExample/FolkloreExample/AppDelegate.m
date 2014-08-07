@@ -77,12 +77,12 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)folkloreConnection:(Folklore *)folklore didFailedWithError:(NSError *)error {
+- (void)folkloreConnection:(Folklore *)folklore didFailWithError:(NSError *)error {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"error: %@", error);
 }
 
-- (void)folklore:(Folklore *)folklore didReceivedMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"[%@] %@", buddy.name, message);
 }
@@ -95,11 +95,11 @@
     }
 }
 
-- (void)folklore:(Folklore *)folklore didUpdateBuddyStatus:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didUpdateBuddy:(FolkloreBuddy *)buddy {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)folklore:(Folklore *)folklore didUpdateCurrentBuddyStatus:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didUpdateSelf:(FolkloreBuddy *)buddy {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 

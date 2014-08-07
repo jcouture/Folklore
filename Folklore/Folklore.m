@@ -84,8 +84,8 @@
     NSError *error = nil;
     
     if (![_stream oldSchoolSecureConnectWithTimeout:5 error:&error]) {
-        if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailedWithError:)]) {
-            [_delegate folkloreConnection:self didFailedWithError:error];
+        if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailWithError:)]) {
+            [_delegate folkloreConnection:self didFailWithError:error];
         }
     }
 }
@@ -185,8 +185,8 @@
 - (void)xmppStreamDidConnect:(XMPPStream *)sender {
     NSError *error = nil;
     if (![_stream authenticateWithPassword:[NSString stringWithFormat:@"AIR_%@", _password] error:&error]) {
-        if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailedWithError:)]) {
-            [_delegate folkloreConnection:self didFailedWithError:error];
+        if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailWithError:)]) {
+            [_delegate folkloreConnection:self didFailWithError:error];
         }
     }
 }
@@ -205,8 +205,8 @@
 - (void)xmppStream:(XMPPStream *)sender didNotAuthenticate:(NSXMLElement *)error {
     NSString *message = @"Connection not authorized.";
     NSError *err = [NSError errorWithDomain:FolkloreErrorDomain code:FolkloreNotAuthorized userInfo:@{NSLocalizedDescriptionKey: message}];
-    if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailedWithError:)]) {
-        [_delegate folkloreConnection:self didFailedWithError:err];
+    if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailWithError:)]) {
+        [_delegate folkloreConnection:self didFailWithError:err];
     }
 }
 
@@ -215,9 +215,9 @@
 		NSString *body = [[message elementForName:@"body"] stringValue];
         for (id <XMPPUser> user in _rosterUsers) {
             if ([[user jid] isEqualToJID:[message from] options:XMPPJIDCompareUser]) {
-                if ([_delegate respondsToSelector:@selector(folklore:didReceivedMessage:fromBuddy:)]) {
+                if ([_delegate respondsToSelector:@selector(folklore:didReceiveMessage:fromBuddy:)]) {
                     FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
-                    [_delegate folklore:self didReceivedMessage:body fromBuddy:buddy];
+                    [_delegate folklore:self didReceiveMessage:body fromBuddy:buddy];
                 }
             }
         }
@@ -243,8 +243,8 @@
     XMPPJID *myJID = [_stream myJID];
     XMPPJID *userJID = user.jid;
     if ([[user jid] isEqualToJID:myJID options:XMPPJIDCompareUser]) {
-        if ([_delegate respondsToSelector:@selector(folklore:didUpdateCurrentBuddyStatus:)]) {
-            [_delegate folklore:self didUpdateCurrentBuddyStatus:[self buddyWithXMPPUser:user]];
+        if ([_delegate respondsToSelector:@selector(folklore:didUpdateSelf:)]) {
+            [_delegate folklore:self didUpdateSelf:[self buddyWithXMPPUser:user]];
         }
     } else {
         [self notifyBuddyUpdateStatusWithUser:user resource:resource];
@@ -263,8 +263,8 @@
     FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
     buddy.buddyInformations = [FolkloreBuddyInformations buddyInformationsWithPresence:resource.presence];
 
-    if ([_delegate respondsToSelector:@selector(folklore:didUpdateBuddyStatus:)]) {
-        [_delegate folklore:self didUpdateBuddyStatus:[self buddyWithXMPPUser:user]];
+    if ([_delegate respondsToSelector:@selector(folklore:didUpdateBuddy:)]) {
+        [_delegate folklore:self didUpdateBuddy:[self buddyWithXMPPUser:user]];
     }
 }
 

@@ -66,9 +66,9 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
 @protocol FolkloreDelegate <NSObject>
 @optional
 - (void)folkloreDidConnect:(Folklore *)folklore;
-- (void)folkloreConnection:(Folklore *)folklore didFailedWithError:(NSError *)error;
-- (void)folklore:(Folklore *)folklore didReceivedMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy;
+- (void)folkloreConnection:(Folklore *)folklore didFailWithError:(NSError *)error;
+- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy;
 - (void)folklore:(Folklore *)folklore didPopulateBuddyList:(NSArray *)buddyList;
-- (void)folklore:(Folklore *)folklore didUpdateBuddyStatus:(FolkloreBuddy *)buddy;
-- (void)folklore:(Folklore *)folklore didUpdateCurrentBuddyStatus:(FolkloreBuddy *)buddy;
+- (void)folklore:(Folklore *)folklore didUpdateBuddy:(FolkloreBuddy *)buddy;
+- (void)folklore:(Folklore *)folklore didUpdateSelf:(FolkloreBuddy *)buddy;
 @end
