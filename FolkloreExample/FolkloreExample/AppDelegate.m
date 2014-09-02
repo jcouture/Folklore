@@ -36,7 +36,7 @@
 
     _folklore = [[Folklore alloc] initWithServerRegion:LoLServerRegionNorthAmerica];
     [_folklore setDelegate:self];
-#error You should set a username and password before running this example.
+//#error You should set a username and password before running this example.
     [_folklore connectWithUsername:@"" password:@""];
     
     [self.window makeKeyAndVisible];
@@ -80,6 +80,10 @@
 - (void)folkloreConnection:(Folklore *)folklore didFailWithError:(NSError *)error {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"error: %@", error);
+}
+
+- (void)folkloreConnectionDidTimeout:(Folklore *)folklore {
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 - (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {

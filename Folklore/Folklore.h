@@ -56,7 +56,9 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
 @property (nonatomic, weak) id <FolkloreDelegate> delegate;
 - (id)init __attribute__((unavailable));
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion;
+- (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConnectionTimeout:(NSTimeInterval)connectionTimeout;
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConsoleDebugOutput:(BOOL)consoleDebugOutput;
+- (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConnectionTimeout:(NSTimeInterval)connectionTimeout withConsoleDebugOutput:(BOOL)consoleDebugOutput;
 - (void)connectWithUsername:(NSString *)username password:(NSString *)password;
 - (void)disconnect;
 - (void)sendMessage:(NSString *)message toBuddy:(FolkloreBuddy *)buddy;
@@ -67,6 +69,7 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
 @optional
 - (void)folkloreDidConnect:(Folklore *)folklore;
 - (void)folkloreConnection:(Folklore *)folklore didFailWithError:(NSError *)error;
+- (void)folkloreConnectionDidTimeout:(Folklore *)folklore;
 - (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy;
 - (void)folklore:(Folklore *)folklore didPopulateBuddyList:(NSArray *)buddyList;
 - (void)folklore:(Folklore *)folklore didUpdateBuddy:(FolkloreBuddy *)buddy;

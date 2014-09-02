@@ -33,7 +33,10 @@
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <XMPPFramework/XMPPJID.h>
 
+NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
+
 @interface Folklore ()
+@property (nonatomic) NSTimeInterval connectionTimeout;
 @property (nonatomic) XMPPStream *stream;
 @property (nonatomic) NSString *password;
 @property (nonatomic) NSArray *rosterUsers;
@@ -42,12 +45,22 @@
 @implementation Folklore
 
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion {
-    return [self initWithServerRegion:serverRegion withConsoleDebugOutput:NO];
+    return [self initWithServerRegion:serverRegion withConnectionTimeout:FolkloreDefaultConnectionTimeoutInterval withConsoleDebugOutput:NO];
+}
+
+- (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConnectionTimeout:(NSTimeInterval)connectionTimeout {
+    return [self initWithServerRegion:serverRegion withConnectionTimeout:connectionTimeout withConsoleDebugOutput:NO];
 }
 
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConsoleDebugOutput:(BOOL)consoleDebugOutput {
+    return [self initWithServerRegion:serverRegion withConnectionTimeout:FolkloreDefaultConnectionTimeoutInterval withConsoleDebugOutput:consoleDebugOutput];
+}
+
+- (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConnectionTimeout:(NSTimeInterval)connectionTimeout withConsoleDebugOutput:(BOOL)consoleDebugOutput {
     if (self = [super init]) {
         NSString *hostname = [self hostnameForServerRegion:serverRegion];
+        
+        _connectionTimeout = connectionTimeout;
         
         if (consoleDebugOutput) {
             [DDLog addLogger:[DDTTYLogger sharedInstance] withLogLevel:XMPP_LOG_FLAG_SEND_RECV];
@@ -83,7 +96,7 @@
     [_stream setMyJID:[XMPPJID jidWithString:[NSString stringWithFormat:@"%@@pvp.net", username] resource:@"xiff"]];
     NSError *error = nil;
     
-    if (![_stream oldSchoolSecureConnectWithTimeout:5 error:&error]) {
+    if (![_stream oldSchoolSecureConnectWithTimeout:_connectionTimeout error:&error]) {
         if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailWithError:)]) {
             [_delegate folkloreConnection:self didFailWithError:error];
         }
@@ -111,72 +124,6 @@
         
 		[_stream sendElement:messageElement];
     }
-}
-
-
-#pragma mark - Private Implementation
-
-- (FolkloreBuddy *)buddyWithXMPPUser:(id <XMPPUser>)user {
-    FolkloreBuddy *buddy = [[FolkloreBuddy alloc] initWithJID:user.jid];
-    [buddy setName:user.nickname];
-    [buddy setOnline:user.isOnline];
-    return buddy;
-}
-
-- (NSString *)hostnameForServerRegion:(LoLServerRegion)serverRegion {
-    NSString *hostname = nil;
-    
-    switch (serverRegion) {
-        case LoLServerRegionNorthAmerica:
-            hostname = @"chat.na1.lol.riotgames.com";
-            break;
-        case LoLServerRegionEuropeWest:
-            hostname = @"chat.eu.lol.riotgames.com";
-            break;
-        case LoLServerRegionNordicEast:
-            hostname = @"chat.eun1.lol.riotgames.com";
-            break;
-        case LoLServerRegionKorean:
-            hostname = @"chat.kr.lol.riotgames.com";
-            break;            
-        case LoLServerRegionBrazil:
-            hostname = @"chat.br.lol.riotgames.com";
-            break;            
-        case LoLServerRegionTurkey:
-            hostname = @"chat.tr.lol.riotgames.com";
-            break;             
-        case LoLServerRegionRussia:
-            hostname = @"chat.ru.lol.riotgames.com";
-            break;                  
-        case LoLServerRegionLatinNorth:
-            hostname = @"chat.la1.lol.riotgames.com";
-            break;               
-        case LoLServerRegionLatinSouth:
-            hostname = @"chat.la2.lol.riotgames.com";
-            break;       
-        case LoLServerRegionOceanic:
-            hostname = @"chat.oc1.lol.riotgames.com";
-            break;                 
-        case LoLServerRegionPublicBeta:
-            hostname = @"chat.pbe1.lol.riotgames.com";
-            break;                             
-        case LoLServerRegionTaiwan:
-            hostname = @"chattw.lol.garenanow.com";
-            break;
-        case LoLServerRegionThailand:
-            hostname = @"chatth.lol.garenanow.com";
-            break;
-        case LoLServerRegionPhilippines:
-            hostname = @"chatph.lol.garenanow.com";
-            break;
-        case LoLServerRegionVietnam:
-            hostname = @"chatvn.lol.garenanow.com";
-            break;
-        default:
-            break;
-    }
-    
-    return hostname;
 }
 
 
@@ -224,6 +171,13 @@
     }
 }
 
+- (void)xmppStreamConnectDidTimeout:(XMPPStream *)sender {
+    if ([_delegate respondsToSelector:@selector(folkloreConnectionDidTimeout:)]) {
+        [_delegate folkloreConnectionDidTimeout:self];
+    }
+}
+
+
 #pragma mark - XMPPRosterMemoryStorageDelegate Protocol
 
 - (void)xmppRosterDidPopulate:(XMPPRosterMemoryStorage *)sender {
@@ -241,7 +195,6 @@
 
 - (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didAddResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
     XMPPJID *myJID = [_stream myJID];
-    XMPPJID *userJID = user.jid;
     if ([[user jid] isEqualToJID:myJID options:XMPPJIDCompareUser]) {
         if ([_delegate respondsToSelector:@selector(folklore:didUpdateSelf:)]) {
             [_delegate folklore:self didUpdateSelf:[self buddyWithXMPPUser:user]];
@@ -266,6 +219,72 @@
     if ([_delegate respondsToSelector:@selector(folklore:didUpdateBuddy:)]) {
         [_delegate folklore:self didUpdateBuddy:[self buddyWithXMPPUser:user]];
     }
+}
+
+
+#pragma mark - Private Implementation
+
+- (FolkloreBuddy *)buddyWithXMPPUser:(id <XMPPUser>)user {
+    FolkloreBuddy *buddy = [[FolkloreBuddy alloc] initWithJID:user.jid];
+    [buddy setName:user.nickname];
+    [buddy setOnline:user.isOnline];
+    return buddy;
+}
+
+- (NSString *)hostnameForServerRegion:(LoLServerRegion)serverRegion {
+    NSString *hostname = nil;
+    
+    switch (serverRegion) {
+        case LoLServerRegionNorthAmerica:
+            hostname = @"chat.na1.lol.riotgames.com";
+            break;
+        case LoLServerRegionEuropeWest:
+            hostname = @"chat.eu.lol.riotgames.com";
+            break;
+        case LoLServerRegionNordicEast:
+            hostname = @"chat.eun1.lol.riotgames.com";
+            break;
+        case LoLServerRegionKorean:
+            hostname = @"chat.kr.lol.riotgames.com";
+            break;
+        case LoLServerRegionBrazil:
+            hostname = @"chat.br.lol.riotgames.com";
+            break;
+        case LoLServerRegionTurkey:
+            hostname = @"chat.tr.lol.riotgames.com";
+            break;
+        case LoLServerRegionRussia:
+            hostname = @"chat.ru.lol.riotgames.com";
+            break;
+        case LoLServerRegionLatinNorth:
+            hostname = @"chat.la1.lol.riotgames.com";
+            break;
+        case LoLServerRegionLatinSouth:
+            hostname = @"chat.la2.lol.riotgames.com";
+            break;
+        case LoLServerRegionOceanic:
+            hostname = @"chat.oc1.lol.riotgames.com";
+            break;
+        case LoLServerRegionPublicBeta:
+            hostname = @"chat.pbe1.lol.riotgames.com";
+            break;
+        case LoLServerRegionTaiwan:
+            hostname = @"chattw.lol.garenanow.com";
+            break;
+        case LoLServerRegionThailand:
+            hostname = @"chatth.lol.garenanow.com";
+            break;
+        case LoLServerRegionPhilippines:
+            hostname = @"chatph.lol.garenanow.com";
+            break;
+        case LoLServerRegionVietnam:
+            hostname = @"chatvn.lol.garenanow.com";
+            break;
+        default:
+            break;
+    }
+    
+    return hostname;
 }
 
 @end
