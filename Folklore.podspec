@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'Folklore'
-  s.version  = '0.3.0'
+  s.version  = '0.4.0'
   s.license  = 'MIT'
   s.summary  = 'League of Legends chat service library for iOS and OS X.'
   s.homepage = 'https://github.com/jcouture/Folklore'
