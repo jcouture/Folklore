@@ -239,7 +239,7 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
             hostname = @"chat.na1.lol.riotgames.com";
             break;
         case LoLServerRegionEuropeWest:
-            hostname = @"chat.eu.lol.riotgames.com";
+            hostname = @"chat.euw1.lol.riotgames.com";
             break;
         case LoLServerRegionNordicEast:
             hostname = @"chat.eun1.lol.riotgames.com";
