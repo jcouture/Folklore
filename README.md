@@ -31,18 +31,18 @@ Don't forget to `#import <Folklore/Folklore.h>`.
     NSLog(@"Connection successful");
 }
 
-- (void)folkloreConnection:(Folklore *)folklore didFailedWithError:(NSError *)error {
+- (void)folkloreConnection:(Folklore *)folklore didFailWithError:(NSError *)error {
     NSLog(@"Connection failed with error: %@", error);
 }
 ```
 
-### Buddy list update
+### Buddy list populate
 
 ```objc
 #pragma mark - FolkloreDelegate Protocol
 
-- (void)folklore:(Folklore *)folklore didUpdatedBuddyList:(NSArray *)buddies {
-    for (FolkloreBuddy *buddy in buddies) {
+- (void)folklore:(Folklore *)folklore didPopulateBuddyList:(NSArray *)buddyList {
+    for (FolkloreBuddy *buddy in buddyList) {
         NSLog(@"%@ is %@", buddy.name, (buddy.isOnline ? @"online" : @"offline"));
     }
 }
@@ -52,11 +52,11 @@ Don't forget to `#import <Folklore/Folklore.h>`.
 
 ```objc
 // `_buddies` is a NSArray of FolkloreBuddy objects, obtained during a buddy list update.
-[_folklore sendMessage:@"Welcome to Summoner's Rift!" toBuddy:_buddies[index]];
+[_folklore sendMessage:@"Welcome to Summoner's Rift!" toBuddy:_buddyList[index]];
 
 #pragma mark - FolkloreDelegate Protocol
 
-- (void)folklore:(Folklore *)folklore didReceivedMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
     NSLog(@"[%@] %@", buddy.name, message);
 }
 ```
