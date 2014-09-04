@@ -36,7 +36,7 @@
 
     _folklore = [[Folklore alloc] initWithServerRegion:LoLServerRegionNorthAmerica];
     [_folklore setDelegate:self];
-//#error You should set a username and password before running this example.
+#error You should set a username and password before running this example.
     [_folklore connectWithUsername:@"" password:@""];
     
     [self.window makeKeyAndVisible];
