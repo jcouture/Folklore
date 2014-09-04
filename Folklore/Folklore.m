@@ -93,7 +93,7 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
     _password = password;
     
     //* League of Legends' specific jid format
-    [_stream setMyJID:[XMPPJID jidWithString:[NSString stringWithFormat:@"%@@pvp.net", username] resource:@"xiff"]];
+    [_stream setMyJID:[XMPPJID jidWithString:[NSString stringWithFormat:@"%@@pvp.net", username] resource:@"folklore"]];
     NSError *error = nil;
     
     if (![_stream oldSchoolSecureConnectWithTimeout:_connectionTimeout error:&error]) {
