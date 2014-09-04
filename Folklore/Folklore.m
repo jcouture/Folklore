@@ -214,10 +214,11 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 
 - (void)notifyBuddyUpdateStatusWithUser:(XMPPUserMemoryStorageObject *)user resource:(XMPPResourceMemoryStorageObject *)resource {
     FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
-    buddy.buddyInformations = [FolkloreBuddyInformations buddyInformationsWithPresence:resource.presence];
+    [buddy setStatus:FolkloreBuddyStatusWithString([[resource presence] show])];
+    [buddy setBuddyInformations:[FolkloreBuddyInformations buddyInformationsWithPresence:[resource presence]]];
 
     if ([_delegate respondsToSelector:@selector(folklore:didUpdateBuddy:)]) {
-        [_delegate folklore:self didUpdateBuddy:[self buddyWithXMPPUser:user]];
+        [_delegate folklore:self didUpdateBuddy:buddy];
     }
 }
 

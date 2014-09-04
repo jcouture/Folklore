@@ -24,6 +24,15 @@
 #import <Foundation/Foundation.h>
 #import <XMPPFramework/XMPPJID.h>
 
+typedef NS_ENUM(NSInteger, FolkloreBuddyStatus) {
+    FolkloreBuddyStatusAvailable,
+    FolkloreBuddyStatusAway,
+    FolkloreBuddyStatusUnavailable
+};
+
+extern NSString* StringWithFolkloreBuddyStatus(FolkloreBuddyStatus status);
+extern FolkloreBuddyStatus FolkloreBuddyStatusWithString(NSString *statusString);
+
 @class FolkloreBuddyInformations;
 
 @interface FolkloreBuddy : NSObject
@@ -31,6 +40,7 @@
 @property (nonatomic, readonly) XMPPJID *JID;
 @property (nonatomic) NSString *name;
 @property (nonatomic, getter = isOnline) BOOL online;
+@property (nonatomic) FolkloreBuddyStatus status;
 @property (nonatomic) FolkloreBuddyInformations *buddyInformations;
 
 - (instancetype)initWithJID:(XMPPJID *)JID;

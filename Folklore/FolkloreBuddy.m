@@ -24,6 +24,26 @@
 #import "FolkloreBuddy.h"
 #import "FolkloreBuddyInformations.h"
 
+NSString* StringWithFolkloreBuddyStatus(FolkloreBuddyStatus status) {
+    switch (status) {
+        case FolkloreBuddyStatusAvailable:
+            return @"Available";
+        case FolkloreBuddyStatusAway:
+            return @"Away";
+        case FolkloreBuddyStatusUnavailable:
+            return @"Unavailable";
+    }
+}
+
+FolkloreBuddyStatus FolkloreBuddyStatusWithString(NSString *statusString) {
+    if ([[statusString lowercaseString] isEqualToString:@"chat"]) {
+        return FolkloreBuddyStatusAvailable;
+    } else if ([[statusString lowercaseString] isEqualToString:@"away"]) {
+        return FolkloreBuddyStatusAway;
+    }
+    return FolkloreBuddyStatusUnavailable;
+}
+
 @implementation FolkloreBuddy
 
 - (instancetype)initWithJID:(XMPPJID *)JID {
@@ -39,6 +59,7 @@
     [d appendFormat:@"id: %@\n", [self.JID description]];
     [d appendFormat:@"name: %@\n", self.name];
     [d appendFormat:@"isOnline: %@\n", self.isOnline ? @"true" : @"false"];
+    [d appendFormat:@"status: %@\n", StringWithFolkloreBuddyStatus(self.status)];
     [d appendFormat:@"%@\n", [self.buddyInformations description]];
     return d;
 }

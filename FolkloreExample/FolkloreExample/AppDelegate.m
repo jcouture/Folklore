@@ -93,14 +93,15 @@
 
 - (void)folklore:(Folklore *)folklore didPopulateBuddyList:(NSArray *)buddies {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    
+    NSLog(@"Roster:");
     for (FolkloreBuddy *buddy in buddies) {
-        NSLog(@"%@ is %@", buddy.name, (buddy.isOnline ? @"online" : @"offline"));
+        NSLog(@"\t%@", buddy.name);
     }
 }
 
 - (void)folklore:(Folklore *)folklore didUpdateBuddy:(FolkloreBuddy *)buddy {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSLog(@"%@", buddy);
 }
 
 - (void)folklore:(Folklore *)folklore didUpdateSelf:(FolkloreBuddy *)buddy {
