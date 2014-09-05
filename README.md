@@ -36,7 +36,9 @@ Don't forget to `#import <Folklore/Folklore.h>`.
 }
 ```
 
-### Friend List
+### Friend list
+
+Folklore does not maintain a list of friends. It is obtained by this delegate method for the implementation to manage. By default every friend object in the list will be offline/unavailable until a friend update is received for each online friends,  individually.
 
 ```objc
 #pragma mark - FolkloreDelegate Protocol
@@ -45,6 +47,16 @@ Don't forget to `#import <Folklore/Folklore.h>`.
     for (FolkloreFriend *friend in friends) {
         NSLog(@"\t%@", friend.name);
     }
+}
+```
+
+### Friend update
+
+```objc
+#pragma mark - FolkloreDelegate Protocol
+
+- (void)folklore:(Folklore *)folklore didReceiveFriendUpdate:(FolkloreFriend *)friend {
+    NSLog(@"%@", friend);
 }
 ```
 
@@ -61,11 +73,14 @@ Don't forget to `#import <Folklore/Folklore.h>`.
 }
 ```
 
+## Contributors
+ * [Rob Isakson](https://github.com/robisaks)
+ * [Dany L'Hébreux](https://github.com/danylhebreux)
+
 ## Contact
 
  * [Jean-Philippe Couture](https://github.com/jcouture)
  * [@jcouture](https://twitter.com/jcouture)
-
 
 ## License
 
