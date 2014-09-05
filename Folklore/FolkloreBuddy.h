@@ -27,6 +27,7 @@
 typedef NS_ENUM(NSInteger, FolkloreBuddyStatus) {
     FolkloreBuddyStatusAvailable,
     FolkloreBuddyStatusAway,
+    FolkloreBuddyStatusDoNotDisturb,
     FolkloreBuddyStatusUnavailable
 };
 

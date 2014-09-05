@@ -30,6 +30,8 @@ NSString* StringWithFolkloreBuddyStatus(FolkloreBuddyStatus status) {
             return @"Available";
         case FolkloreBuddyStatusAway:
             return @"Away";
+        case FolkloreBuddyStatusDoNotDisturb:
+            return @"Do Not Disturb";
         case FolkloreBuddyStatusUnavailable:
             return @"Unavailable";
     }
@@ -40,6 +42,8 @@ FolkloreBuddyStatus FolkloreBuddyStatusWithString(NSString *statusString) {
         return FolkloreBuddyStatusAvailable;
     } else if ([[statusString lowercaseString] isEqualToString:@"away"]) {
         return FolkloreBuddyStatusAway;
+    } else if ([[statusString lowercaseString] isEqualToString:@"dnd"]) {
+        return FolkloreBuddyStatusDoNotDisturb;
     }
     return FolkloreBuddyStatusUnavailable;
 }
