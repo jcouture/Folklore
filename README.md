@@ -36,14 +36,14 @@ Don't forget to `#import <Folklore/Folklore.h>`.
 }
 ```
 
-### Buddy list populate
+### Friend List
 
 ```objc
 #pragma mark - FolkloreDelegate Protocol
 
-- (void)folklore:(Folklore *)folklore didPopulateBuddyList:(NSArray *)buddyList {
-    for (FolkloreBuddy *buddy in buddyList) {
-        NSLog(@"%@ is %@", buddy.name, (buddy.isOnline ? @"online" : @"offline"));
+- (void)folklore:(Folklore *)folklore didReceiveFriends:(NSArray *)friends {
+    for (FolkloreFriend *friend in friends) {
+        NSLog(@"\t%@", friend.name);
     }
 }
 ```
@@ -51,13 +51,13 @@ Don't forget to `#import <Folklore/Folklore.h>`.
 ### Sending and receiving messages
 
 ```objc
-// `_buddies` is a NSArray of FolkloreBuddy objects, obtained during a buddy list update.
-[_folklore sendMessage:@"Welcome to Summoner's Rift!" toBuddy:_buddyList[index]];
+// `_friends` is a NSArray of FolkloreFriend objects, obtained during a friend list update.
+[_folklore sendMessage:@"Welcome to Summoner's Rift!" toFriend:_friends[index]];
 
 #pragma mark - FolkloreDelegate Protocol
 
-- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
-    NSLog(@"[%@] %@", buddy.name, message);
+- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromfriend:(FolkloreFriend *)friend {
+    NSLog(@"[%@] %@", friend.name, message);
 }
 ```
 

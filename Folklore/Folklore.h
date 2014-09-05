@@ -1,7 +1,7 @@
 //
 // Folklore.h
 //
-// Copyright (c) 2013 Jean-Philippe Couture
+// Copyright (c) 2014 Jean-Philippe Couture
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,8 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "FolkloreBuddy.h"
-#import "FolkloreBuddyInformations.h"
+#import "FolkloreFriend.h"
+#import "FolkloreFriendInformation.h"
 
 typedef NS_ENUM(NSInteger, LoLServerRegion) {
     LoLServerRegionNorthAmerica,
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
     FolkloreNotAuthorized
 };
 
-@class FolkloreBuddyInformations;
+@class FolkloreFriendInformation;
 @protocol FolkloreDelegate;
 
 @interface Folklore : NSObject
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConnectionTimeout:(NSTimeInterval)connectionTimeout withConsoleDebugOutput:(BOOL)consoleDebugOutput;
 - (void)connectWithUsername:(NSString *)username password:(NSString *)password;
 - (void)disconnect;
-- (void)sendMessage:(NSString *)message toBuddy:(FolkloreBuddy *)buddy;
+- (void)sendMessage:(NSString *)message toFriend:(FolkloreFriend *)friend;
 @end
 
 
@@ -70,8 +70,8 @@ typedef NS_ENUM(NSInteger, FolkloreErrorCode) {
 - (void)folkloreDidConnect:(Folklore *)folklore;
 - (void)folkloreConnection:(Folklore *)folklore didFailWithError:(NSError *)error;
 - (void)folkloreConnectionDidTimeout:(Folklore *)folklore;
-- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy;
-- (void)folklore:(Folklore *)folklore didPopulateBuddyList:(NSArray *)buddyList;
-- (void)folklore:(Folklore *)folklore didUpdateBuddy:(FolkloreBuddy *)buddy;
-- (void)folklore:(Folklore *)folklore didUpdateSelf:(FolkloreBuddy *)buddy;
+- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromFriend:(FolkloreFriend *)friend;
+- (void)folklore:(Folklore *)folklore didReceiveFriends:(NSArray *)friends;
+- (void)folklore:(Folklore *)folklore didReceiveFriendUpdate:(FolkloreFriend *)friend;
+- (void)folklore:(Folklore *)folklore didReceiveSelfUpdate:(FolkloreFriend *)friend;
 @end

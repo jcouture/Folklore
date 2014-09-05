@@ -1,7 +1,7 @@
 //
-// FolkloreBuddyInformations.h
+// FolkloreFriend.h
 //
-// Copyright (c) 2013 Jean-Philippe Couture
+// Copyright (c) 2014 Jean-Philippe Couture
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,28 +22,29 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <XMPPFramework/XMPPJID.h>
 
-@class XMPPPresence;
+typedef NS_ENUM(NSInteger, FolkloreFriendStatus) {
+    FolkloreFriendStatusAvailable,
+    FolkloreFriendStatusAway,
+    FolkloreFriendStatusDoNotDisturb,
+    FolkloreFriendStatusUnavailable
+};
 
-@interface FolkloreBuddyInformations : NSObject
+extern NSString* StringWithFolkloreFriendStatus(FolkloreFriendStatus status);
+extern FolkloreFriendStatus FolkloreFriendStatusWithString(NSString *statusString);
 
-+ (FolkloreBuddyInformations *)buddyInformationsWithPresence:(XMPPPresence *)presence;
+@class FolkloreFriendInformation;
 
-@property (nonatomic) NSInteger profileIcon;
-@property (nonatomic) NSInteger level;
-@property (nonatomic) NSInteger wins;
-@property (nonatomic) NSInteger leaves;
-@property (nonatomic) NSInteger odinWins;
-@property (nonatomic) NSInteger odinLeaves;
-@property (nonatomic) NSString *tier;
-@property (nonatomic) NSString *statusMessage;
-@property (nonatomic) NSString *gameStatus;
-@property (nonatomic) NSString *rankedLeagueName;
-@property (nonatomic) NSString *rankedLeagueDivision;
-@property (nonatomic) NSString *rankedLeagueTier;
-@property (nonatomic) NSString *rankedLeagueQueue;
-@property (nonatomic) NSInteger rankedWins;
-@property (nonatomic) NSInteger rankedLosses;
-@property (nonatomic) NSInteger rankedRating;
+@interface FolkloreFriend : NSObject
+
+@property (nonatomic, readonly) XMPPJID *JID;
+@property (nonatomic) NSString *name;
+@property (nonatomic, getter = isOnline) BOOL online;
+@property (nonatomic) FolkloreFriendStatus status;
+@property (nonatomic) FolkloreFriendInformation *friendInformation;
+
+- (id)init __attribute__((unavailable));
+- (instancetype)initWithJID:(XMPPJID *)JID;
 
 @end

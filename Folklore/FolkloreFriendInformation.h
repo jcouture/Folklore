@@ -1,7 +1,7 @@
 //
-// FolkloreBuddy.h
+// FolkloreFriendInformation.h
 //
-// Copyright (c) 2013 Jean-Philippe Couture
+// Copyright (c) 2014 Jean-Philippe Couture
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,28 +22,28 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <XMPPFramework/XMPPJID.h>
 
-typedef NS_ENUM(NSInteger, FolkloreBuddyStatus) {
-    FolkloreBuddyStatusAvailable,
-    FolkloreBuddyStatusAway,
-    FolkloreBuddyStatusDoNotDisturb,
-    FolkloreBuddyStatusUnavailable
-};
+@class XMPPPresence;
 
-extern NSString* StringWithFolkloreBuddyStatus(FolkloreBuddyStatus status);
-extern FolkloreBuddyStatus FolkloreBuddyStatusWithString(NSString *statusString);
+@interface FolkloreFriendInformation : NSObject
 
-@class FolkloreBuddyInformations;
++ (FolkloreFriendInformation *)friendInformationWithPresence:(XMPPPresence *)presence;
 
-@interface FolkloreBuddy : NSObject
-
-@property (nonatomic, readonly) XMPPJID *JID;
-@property (nonatomic) NSString *name;
-@property (nonatomic, getter = isOnline) BOOL online;
-@property (nonatomic) FolkloreBuddyStatus status;
-@property (nonatomic) FolkloreBuddyInformations *buddyInformations;
-
-- (instancetype)initWithJID:(XMPPJID *)JID;
+@property (nonatomic) NSInteger profileIcon;
+@property (nonatomic) NSInteger level;
+@property (nonatomic) NSInteger wins;
+@property (nonatomic) NSInteger leaves;
+@property (nonatomic) NSInteger odinWins;
+@property (nonatomic) NSInteger odinLeaves;
+@property (nonatomic) NSString *tier;
+@property (nonatomic) NSString *statusMessage;
+@property (nonatomic) NSString *gameStatus;
+@property (nonatomic) NSString *rankedLeagueName;
+@property (nonatomic) NSString *rankedLeagueDivision;
+@property (nonatomic) NSString *rankedLeagueTier;
+@property (nonatomic) NSString *rankedLeagueQueue;
+@property (nonatomic) NSInteger rankedWins;
+@property (nonatomic) NSInteger rankedLosses;
+@property (nonatomic) NSInteger rankedRating;
 
 @end

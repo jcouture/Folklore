@@ -1,7 +1,7 @@
 //
 // Folklore.m
 //
-// Copyright (c) 2013 Jean-Philippe Couture
+// Copyright (c) 2014 Jean-Philippe Couture
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import "Folklore.h"
-#import "FolkloreBuddyInformations.h"
+#import "FolkloreFriendInformation.h"
 #import <XMPPFramework/XMPPFramework.h>
 #import <XMPPFramework/XMPPReconnect.h>
 #import <XMPPFramework/XMPPRoster.h>
@@ -109,9 +109,9 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
     [_stream disconnectAfterSending];
 }
 
-- (void)sendMessage:(NSString *)message toBuddy:(FolkloreBuddy *)buddy {
+- (void)sendMessage:(NSString *)message toFriend:(FolkloreFriend *)friend {
     NSParameterAssert(message);
-    NSParameterAssert(buddy);
+    NSParameterAssert(friend);
     
     if ([message length] > 0) {
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
@@ -119,7 +119,7 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
         
 		NSXMLElement *messageElement = [NSXMLElement elementWithName:@"message"];
 		[messageElement addAttributeWithName:@"type" stringValue:@"chat"];
-		[messageElement addAttributeWithName:@"to" stringValue:[buddy.JID full]];
+		[messageElement addAttributeWithName:@"to" stringValue:[friend.JID full]];
 		[messageElement addChild:body];
         
 		[_stream sendElement:messageElement];
@@ -162,9 +162,9 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 		NSString *body = [[message elementForName:@"body"] stringValue];
         for (id <XMPPUser> user in _rosterUsers) {
             if ([[user jid] isEqualToJID:[message from] options:XMPPJIDCompareUser]) {
-                if ([_delegate respondsToSelector:@selector(folklore:didReceiveMessage:fromBuddy:)]) {
-                    FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
-                    [_delegate folklore:self didReceiveMessage:body fromBuddy:buddy];
+                if ([_delegate respondsToSelector:@selector(folklore:didReceiveMessage:fromFriend:)]) {
+                    FolkloreFriend *friend = [self folkloreFriendWithXMPPUser:user];
+                    [_delegate folklore:self didReceiveMessage:body fromFriend:friend];
                 }
             }
         }
@@ -181,55 +181,55 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 #pragma mark - XMPPRosterMemoryStorageDelegate Protocol
 
 - (void)xmppRosterDidPopulate:(XMPPRosterMemoryStorage *)sender {
-    _rosterUsers = [sender sortedUsersByAvailabilityName];
-    NSMutableArray *buddyList = [[NSMutableArray alloc] initWithCapacity:[_rosterUsers count]];
+    _rosterUsers = [sender sortedUsersByName];
+    NSMutableArray *friends = [[NSMutableArray alloc] initWithCapacity:[_rosterUsers count]];
     
     for (id <XMPPUser> user in _rosterUsers) {
-        [buddyList addObject:[self buddyWithXMPPUser:user]];
+        [friends addObject:[self folkloreFriendWithXMPPUser:user]];
     }
     
-    if ([_delegate respondsToSelector:@selector(folklore:didPopulateBuddyList:)]) {
-        [_delegate folklore:self didPopulateBuddyList:buddyList];
+    if ([_delegate respondsToSelector:@selector(folklore:didReceiveFriends:)]) {
+        [_delegate folklore:self didReceiveFriends:friends];
     }
 }
 
 - (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didAddResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
     XMPPJID *myJID = [_stream myJID];
     if ([[user jid] isEqualToJID:myJID options:XMPPJIDCompareUser]) {
-        if ([_delegate respondsToSelector:@selector(folklore:didUpdateSelf:)]) {
-            [_delegate folklore:self didUpdateSelf:[self buddyWithXMPPUser:user]];
+        if ([_delegate respondsToSelector:@selector(folklore:didReceiveSelfUpdate:)]) {
+            [_delegate folklore:self didReceiveSelfUpdate:[self folkloreFriendWithXMPPUser:user]];
         }
     } else {
-        [self notifyBuddyUpdateStatusWithUser:user resource:resource];
+        [self notifyFriendUpdateStatusWithUser:user resource:resource];
     }
 }
 
 - (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didUpdateResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
-    [self notifyBuddyUpdateStatusWithUser:user resource:resource];
+    [self notifyFriendUpdateStatusWithUser:user resource:resource];
 }
 
 - (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didRemoveResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
-    [self notifyBuddyUpdateStatusWithUser:user resource:resource];
+    [self notifyFriendUpdateStatusWithUser:user resource:resource];
 }
 
-- (void)notifyBuddyUpdateStatusWithUser:(XMPPUserMemoryStorageObject *)user resource:(XMPPResourceMemoryStorageObject *)resource {
-    FolkloreBuddy *buddy = [self buddyWithXMPPUser:user];
-    [buddy setStatus:FolkloreBuddyStatusWithString([[resource presence] show])];
-    [buddy setBuddyInformations:[FolkloreBuddyInformations buddyInformationsWithPresence:[resource presence]]];
+- (void)notifyFriendUpdateStatusWithUser:(XMPPUserMemoryStorageObject *)user resource:(XMPPResourceMemoryStorageObject *)resource {
+    FolkloreFriend *friend = [self folkloreFriendWithXMPPUser:user];
+    [friend setStatus:FolkloreFriendStatusWithString([[resource presence] show])];
+    [friend setFriendInformation:[FolkloreFriendInformation friendInformationWithPresence:[resource presence]]];
 
-    if ([_delegate respondsToSelector:@selector(folklore:didUpdateBuddy:)]) {
-        [_delegate folklore:self didUpdateBuddy:buddy];
+    if ([_delegate respondsToSelector:@selector(folklore:didReceiveFriendUpdate:)]) {
+        [_delegate folklore:self didReceiveFriendUpdate:friend];
     }
 }
 
 
 #pragma mark - Private Implementation
 
-- (FolkloreBuddy *)buddyWithXMPPUser:(id <XMPPUser>)user {
-    FolkloreBuddy *buddy = [[FolkloreBuddy alloc] initWithJID:user.jid];
-    [buddy setName:user.nickname];
-    [buddy setOnline:user.isOnline];
-    return buddy;
+- (FolkloreFriend *)folkloreFriendWithXMPPUser:(id <XMPPUser>)user {
+    FolkloreFriend *friend = [[FolkloreFriend alloc] initWithJID:[user jid]];
+    [friend setName:[user nickname]];
+    [friend setOnline:[user isOnline]];
+    return friend;
 }
 
 - (NSString *)hostnameForServerRegion:(LoLServerRegion)serverRegion {

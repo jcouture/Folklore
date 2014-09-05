@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		090800AE1811BC1400F468B8 /* FolkloreBuddyInformations.m in Sources */ = {isa = PBXBuildFile; fileRef = 090800AD1811BC1400F468B8 /* FolkloreBuddyInformations.m */; };
+		090800AE1811BC1400F468B8 /* FolkloreFriendInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 090800AD1811BC1400F468B8 /* FolkloreFriendInformation.m */; };
 		096A334D18085DE400EF4D63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A334C18085DE400EF4D63 /* Foundation.framework */; };
 		096A334F18085DE400EF4D63 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A334E18085DE400EF4D63 /* CoreGraphics.framework */; };
 		096A335118085DE400EF4D63 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A335018085DE400EF4D63 /* UIKit.framework */; };
@@ -21,7 +21,7 @@
 		096A337018085DE400EF4D63 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 096A336E18085DE400EF4D63 /* InfoPlist.strings */; };
 		096A337218085DE400EF4D63 /* FolkloreExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 096A337118085DE400EF4D63 /* FolkloreExampleTests.m */; };
 		0972574D18085E8600124028 /* Folklore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0972574C18085E8600124028 /* Folklore.m */; };
-		097257501808606500124028 /* FolkloreBuddy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0972574F1808606500124028 /* FolkloreBuddy.m */; };
+		097257501808606500124028 /* FolkloreFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0972574F1808606500124028 /* FolkloreFriend.m */; };
 		45020F2EF9EF416CB3A417D7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 929DEC3514B7433FB72F6D4D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -36,28 +36,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		090800AC1811BC1400F468B8 /* FolkloreBuddyInformations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolkloreBuddyInformations.h; sourceTree = "<group>"; };
-		090800AD1811BC1400F468B8 /* FolkloreBuddyInformations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolkloreBuddyInformations.m; sourceTree = "<group>"; };
+		090800AC1811BC1400F468B8 /* FolkloreFriendInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FolkloreFriendInformation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		090800AD1811BC1400F468B8 /* FolkloreFriendInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FolkloreFriendInformation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		096A334918085DE400EF4D63 /* FolkloreExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FolkloreExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		096A334C18085DE400EF4D63 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		096A334E18085DE400EF4D63 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		096A335018085DE400EF4D63 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		096A335418085DE400EF4D63 /* FolkloreExample-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FolkloreExample-Info.plist"; sourceTree = "<group>"; };
 		096A335618085DE400EF4D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		096A335818085DE400EF4D63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		096A335818085DE400EF4D63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		096A335A18085DE400EF4D63 /* FolkloreExample-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FolkloreExample-Prefix.pch"; sourceTree = "<group>"; };
-		096A335B18085DE400EF4D63 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		096A335C18085DE400EF4D63 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		096A335B18085DE400EF4D63 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		096A335C18085DE400EF4D63 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		096A335E18085DE400EF4D63 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		096A336418085DE400EF4D63 /* FolkloreExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FolkloreExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		096A336518085DE400EF4D63 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		096A336D18085DE400EF4D63 /* FolkloreExampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FolkloreExampleTests-Info.plist"; sourceTree = "<group>"; };
 		096A336F18085DE400EF4D63 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		096A337118085DE400EF4D63 /* FolkloreExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FolkloreExampleTests.m; sourceTree = "<group>"; };
-		0972574B18085E8600124028 /* Folklore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folklore.h; sourceTree = "<group>"; };
-		0972574C18085E8600124028 /* Folklore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folklore.m; sourceTree = "<group>"; };
-		0972574E1808606500124028 /* FolkloreBuddy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolkloreBuddy.h; sourceTree = "<group>"; };
-		0972574F1808606500124028 /* FolkloreBuddy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolkloreBuddy.m; sourceTree = "<group>"; };
+		096A337118085DE400EF4D63 /* FolkloreExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FolkloreExampleTests.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0972574B18085E8600124028 /* Folklore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Folklore.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0972574C18085E8600124028 /* Folklore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Folklore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		0972574E1808606500124028 /* FolkloreFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FolkloreFriend.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		0972574F1808606500124028 /* FolkloreFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FolkloreFriend.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		929DEC3514B7433FB72F6D4D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA3612D4EC940858C30E8C9 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,10 +165,10 @@
 			children = (
 				0972574B18085E8600124028 /* Folklore.h */,
 				0972574C18085E8600124028 /* Folklore.m */,
-				0972574E1808606500124028 /* FolkloreBuddy.h */,
-				0972574F1808606500124028 /* FolkloreBuddy.m */,
-				090800AC1811BC1400F468B8 /* FolkloreBuddyInformations.h */,
-				090800AD1811BC1400F468B8 /* FolkloreBuddyInformations.m */,
+				0972574E1808606500124028 /* FolkloreFriend.h */,
+				0972574F1808606500124028 /* FolkloreFriend.m */,
+				090800AC1811BC1400F468B8 /* FolkloreFriendInformation.h */,
+				090800AD1811BC1400F468B8 /* FolkloreFriendInformation.m */,
 			);
 			name = Folklore;
 			path = ../Folklore;
@@ -304,9 +304,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				097257501808606500124028 /* FolkloreBuddy.m in Sources */,
+				097257501808606500124028 /* FolkloreFriend.m in Sources */,
 				0972574D18085E8600124028 /* Folklore.m in Sources */,
-				090800AE1811BC1400F468B8 /* FolkloreBuddyInformations.m in Sources */,
+				090800AE1811BC1400F468B8 /* FolkloreFriendInformation.m in Sources */,
 				096A335D18085DE400EF4D63 /* AppDelegate.m in Sources */,
 				096A335918085DE400EF4D63 /* main.m in Sources */,
 			);

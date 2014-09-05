@@ -1,7 +1,7 @@
 //
 // main.m
 //
-// Copyright (c) 2013 Jean-Philippe Couture
+// Copyright (c) 2014 Jean-Philippe Couture
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,8 +25,7 @@
 
 #import "AppDelegate.h"
 
-int main(int argc, char * argv[])
-{
+int main(int argc, char * argv[]) {
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

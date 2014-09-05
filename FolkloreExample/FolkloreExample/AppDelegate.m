@@ -86,25 +86,25 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromBuddy:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didReceiveMessage:(NSString *)message fromfriend:(FolkloreFriend *)friend {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"[%@] %@", buddy.name, message);
+    NSLog(@"[%@] %@", friend.name, message);
 }
 
-- (void)folklore:(Folklore *)folklore didPopulateBuddyList:(NSArray *)buddies {
+- (void)folklore:(Folklore *)folklore didReceiveFriends:(NSArray *)friends {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     NSLog(@"Roster:");
-    for (FolkloreBuddy *buddy in buddies) {
-        NSLog(@"\t%@", buddy.name);
+    for (FolkloreFriend *friend in friends) {
+        NSLog(@"\t%@", friend.name);
     }
 }
 
-- (void)folklore:(Folklore *)folklore didUpdateBuddy:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didReceiveFriendUpdate:(FolkloreFriend *)friend {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSLog(@"%@", buddy);
+    NSLog(@"%@", friend);
 }
 
-- (void)folklore:(Folklore *)folklore didUpdateSelf:(FolkloreBuddy *)buddy {
+- (void)folklore:(Folklore *)folklore didUpdateSelf:(FolkloreFriend *)friend {
     NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
