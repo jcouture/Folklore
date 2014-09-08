@@ -227,6 +227,9 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
         FolkloreFriend *friend = [self folkloreFriendWithXMPPUser:user];
         [friend setFriendInformation:[FolkloreFriendInformation friendInformationWithPresence:[resource presence]]];
         [friend setStatus:FolkloreFriendStatusWithString([[resource presence] show], friend.friendInformation.gameStatus)];
+        if (!user.isOnline) {
+            [friend setStatus:FolkloreFriendStatusUnavailable];
+        }
         
         if ([_delegate respondsToSelector:@selector(folklore:didReceiveFriendUpdate:)]) {
             [_delegate folklore:self didReceiveFriendUpdate:friend];
