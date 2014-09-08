@@ -74,8 +74,8 @@ Folklore does not maintain a list of friends. It is obtained by this delegate me
 ```
 
 ## Contributors
- * [Rob Isakson](https://github.com/robisaks)
  * [Dany L'Hébreux](https://github.com/danylhebreux)
+ * [Rob Isakson](https://github.com/robisaks)
 
 ## Contact
 
