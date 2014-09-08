@@ -26,24 +26,34 @@
 
 NSString* StringWithFolkloreFriendStatus(FolkloreFriendStatus status) {
     switch (status) {
+        case FolkloreFriendStatusUnavailable:
+            return @"unavailable";
         case FolkloreFriendStatusAvailable:
             return @"available";
         case FolkloreFriendStatusAway:
             return @"away";
-        case FolkloreFriendStatusDoNotDisturb:
-            return @"do not disturb";
-        case FolkloreFriendStatusUnavailable:
-            return @"unavailable";
+        case FolkloreFriendStatusInQueue:
+            return @"in queue";
+        case FolkloreFriendStatusInChampionSelect:
+            return @"in champion select";
+        case FolkloreFriendStatusInGame:
+            return @"in game";
     }
 }
 
-FolkloreFriendStatus FolkloreFriendStatusWithString(NSString *statusString) {
+FolkloreFriendStatus FolkloreFriendStatusWithString(NSString *statusString, NSString *gameStatus) {
     if ([[statusString lowercaseString] isEqualToString:@"chat"]) {
         return FolkloreFriendStatusAvailable;
     } else if ([[statusString lowercaseString] isEqualToString:@"away"]) {
         return FolkloreFriendStatusAway;
     } else if ([[statusString lowercaseString] isEqualToString:@"dnd"]) {
-        return FolkloreFriendStatusDoNotDisturb;
+        if ([[gameStatus lowercaseString] isEqualToString:@"inqueue"]) {
+            return FolkloreFriendStatusInQueue;
+        } else if ([[gameStatus lowercaseString] isEqualToString:@"championselect"]) {
+            return FolkloreFriendStatusInChampionSelect;
+        } else if ([[gameStatus lowercaseString] isEqualToString:@"ingame"]) {
+            return FolkloreFriendStatusInGame;
+        }
     }
     return FolkloreFriendStatusUnavailable;
 }
@@ -63,9 +73,8 @@ FolkloreFriendStatus FolkloreFriendStatusWithString(NSString *statusString) {
     NSMutableString *description = [NSMutableString stringWithFormat:@"<%@: ", NSStringFromClass([self class])];
     [description appendFormat:@"self.JID=%@", self.JID];
     [description appendFormat:@", self.name=%@", self.name];
-    [description appendFormat:@", self.online=%@", (self.online ? @"YES" : @"NO")];
-    [description appendFormat:@", self.status=%@", StringWithFolkloreFriendStatus(self.status)];
     [description appendFormat:@", self.friendInformation=%@", self.friendInformation];
+    [description appendFormat:@", self.status=%@", StringWithFolkloreFriendStatus(self.status)];
     [description appendString:@">"];
 
     return description;

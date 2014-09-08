@@ -40,6 +40,7 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 @property (nonatomic) XMPPStream *stream;
 @property (nonatomic) NSString *password;
 @property (nonatomic) NSArray *rosterUsers;
+@property (nonatomic) dispatch_queue_t friendsQueue;
 @end
 
 @implementation Folklore
@@ -58,6 +59,7 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 
 - (instancetype)initWithServerRegion:(LoLServerRegion)serverRegion withConnectionTimeout:(NSTimeInterval)connectionTimeout withConsoleDebugOutput:(BOOL)consoleDebugOutput {
     if (self = [super init]) {
+        _friendsQueue = dispatch_queue_create("com.Folklore.FriendsQueue", NULL);
         NSString *hostname = [self hostnameForServerRegion:serverRegion];
         
         _connectionTimeout = connectionTimeout;
@@ -96,9 +98,13 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
     [_stream setMyJID:[XMPPJID jidWithString:[NSString stringWithFormat:@"%@@pvp.net", username] resource:@"folklore"]];
     NSError *error = nil;
     
-    if (![_stream oldSchoolSecureConnectWithTimeout:_connectionTimeout error:&error]) {
-        if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailWithError:)]) {
-            [_delegate folkloreConnection:self didFailWithError:error];
+    if ([_stream isConnected]) {
+        [self xmppStreamDidConnect:nil];
+    } else {
+        if (![_stream oldSchoolSecureConnectWithTimeout:_connectionTimeout error:&error]) {
+            if ([_delegate respondsToSelector:@selector(folkloreConnection:didFailWithError:)]) {
+                [_delegate folkloreConnection:self didFailWithError:error];
+            }
         }
     }
 }
@@ -181,27 +187,31 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 #pragma mark - XMPPRosterMemoryStorageDelegate Protocol
 
 - (void)xmppRosterDidPopulate:(XMPPRosterMemoryStorage *)sender {
-    _rosterUsers = [sender sortedUsersByName];
-    NSMutableArray *friends = [[NSMutableArray alloc] initWithCapacity:[_rosterUsers count]];
-    
-    for (id <XMPPUser> user in _rosterUsers) {
-        [friends addObject:[self folkloreFriendWithXMPPUser:user]];
-    }
-    
-    if ([_delegate respondsToSelector:@selector(folklore:didReceiveFriends:)]) {
-        [_delegate folklore:self didReceiveFriends:friends];
-    }
+    dispatch_async(_friendsQueue, ^{
+        _rosterUsers = [sender sortedUsersByName];
+        NSMutableArray *friends = [[NSMutableArray alloc] initWithCapacity:[_rosterUsers count]];
+        
+        for (id <XMPPUser> user in _rosterUsers) {
+            [friends addObject:[self folkloreFriendWithXMPPUser:user]];
+        }
+        
+        if ([_delegate respondsToSelector:@selector(folklore:didReceiveFriends:)]) {
+            [_delegate folklore:self didReceiveFriends:friends];
+        }
+    });
 }
 
 - (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didAddResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
-    XMPPJID *myJID = [_stream myJID];
-    if ([[user jid] isEqualToJID:myJID options:XMPPJIDCompareUser]) {
-        if ([_delegate respondsToSelector:@selector(folklore:didReceiveSelfUpdate:)]) {
-            [_delegate folklore:self didReceiveSelfUpdate:[self folkloreFriendWithXMPPUser:user]];
+    dispatch_async(_friendsQueue, ^{
+        XMPPJID *myJID = [_stream myJID];
+        if ([[user jid] isEqualToJID:myJID options:XMPPJIDCompareUser]) {
+            if ([_delegate respondsToSelector:@selector(folklore:didReceiveSelfUpdate:)]) {
+                [_delegate folklore:self didReceiveSelfUpdate:[self folkloreFriendWithXMPPUser:user]];
+            }
+        } else {
+            [self notifyFriendUpdateStatusWithUser:user resource:resource];
         }
-    } else {
-        [self notifyFriendUpdateStatusWithUser:user resource:resource];
-    }
+    });
 }
 
 - (void)xmppRoster:(XMPPRosterMemoryStorage *)sender didUpdateResource:(XMPPResourceMemoryStorageObject *)resource withUser:(XMPPUserMemoryStorageObject *)user {
@@ -213,13 +223,15 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 }
 
 - (void)notifyFriendUpdateStatusWithUser:(XMPPUserMemoryStorageObject *)user resource:(XMPPResourceMemoryStorageObject *)resource {
-    FolkloreFriend *friend = [self folkloreFriendWithXMPPUser:user];
-    [friend setStatus:FolkloreFriendStatusWithString([[resource presence] show])];
-    [friend setFriendInformation:[FolkloreFriendInformation friendInformationWithPresence:[resource presence]]];
-
-    if ([_delegate respondsToSelector:@selector(folklore:didReceiveFriendUpdate:)]) {
-        [_delegate folklore:self didReceiveFriendUpdate:friend];
-    }
+    dispatch_async(_friendsQueue, ^{
+        FolkloreFriend *friend = [self folkloreFriendWithXMPPUser:user];
+        [friend setFriendInformation:[FolkloreFriendInformation friendInformationWithPresence:[resource presence]]];
+        [friend setStatus:FolkloreFriendStatusWithString([[resource presence] show], friend.friendInformation.gameStatus)];
+        
+        if ([_delegate respondsToSelector:@selector(folklore:didReceiveFriendUpdate:)]) {
+            [_delegate folklore:self didReceiveFriendUpdate:friend];
+        }
+    });
 }
 
 
@@ -228,7 +240,6 @@ NSTimeInterval const FolkloreDefaultConnectionTimeoutInterval = 30;
 - (FolkloreFriend *)folkloreFriendWithXMPPUser:(id <XMPPUser>)user {
     FolkloreFriend *friend = [[FolkloreFriend alloc] initWithJID:[user jid]];
     [friend setName:[user nickname]];
-    [friend setOnline:[user isOnline]];
     return friend;
 }
 

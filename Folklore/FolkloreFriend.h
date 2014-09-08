@@ -24,15 +24,19 @@
 #import <Foundation/Foundation.h>
 #import <XMPPFramework/XMPPJID.h>
 
-typedef NS_ENUM(NSInteger, FolkloreFriendStatus) {
+typedef enum {
+    FolkloreFriendStatusUnavailable,
     FolkloreFriendStatusAvailable,
     FolkloreFriendStatusAway,
-    FolkloreFriendStatusDoNotDisturb,
-    FolkloreFriendStatusUnavailable
-};
+    FolkloreFriendStatusInQueue,
+    FolkloreFriendStatusInChampionSelect,
+    FolkloreFriendStatusInGame
+} FolkloreFriendStatus;
+// Do not use NS_ENUM Obj-c macro for easiest Swift implementation
+// This kind of enum provide a value property that can be used in Swift
 
 extern NSString* StringWithFolkloreFriendStatus(FolkloreFriendStatus status);
-extern FolkloreFriendStatus FolkloreFriendStatusWithString(NSString *statusString);
+extern FolkloreFriendStatus FolkloreFriendStatusWithString(NSString *statusString, NSString *gameStatus);
 
 @class FolkloreFriendInformation;
 
@@ -40,7 +44,6 @@ extern FolkloreFriendStatus FolkloreFriendStatusWithString(NSString *statusStrin
 
 @property (nonatomic, readonly) XMPPJID *JID;
 @property (nonatomic) NSString *name;
-@property (nonatomic, getter = isOnline) BOOL online;
 @property (nonatomic) FolkloreFriendStatus status;
 @property (nonatomic) FolkloreFriendInformation *friendInformation;
 
